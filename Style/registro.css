@@ -1,0 +1,91 @@
+
+#tabla_registro {
+    position: relative;
+    top: 2%;
+    width: 50%;
+    left: 25%;
+    border: 1px solid black;
+    box-shadow: 0px 4px 10px 2px rgba(0,0,0,0.75);
+    background-color: #ECECEC;
+    border-radius: 5px;
+}
+table {
+    position: relative;
+    width: 100%;
+    
+}
+tr {
+    position: relative;
+    width: 80%;
+    border: none;
+}
+td {
+    position: relative;
+    width: 4%;
+    height: 7%;
+    padding: 2%;
+    padding-left: 10%;
+    padding-right: 10%;
+    font-size: 20px;
+}
+
+.part_datos {
+    text-align: right;
+}
+input {
+    outline: none;
+    background-color: #ECECEC;
+    border: none;
+    border-bottom: 1px solid black;
+}
+#bot_registrar {
+    position: relative;
+    height: 6%;
+    width: 20%;
+    left: 70%;
+    margin-bottom: 4%;
+    text-align: left;
+    background-color: #B71C1C;
+    border: none;
+    box-shadow: 0px 6px 13px 0px rgba(0,0,0,0.75);
+    outline: none;
+}
+#bot_registrar:hover {
+    background-color: #BDFF3A;
+}
+#img_registr {
+     position: absolute;
+    height: 50%;
+    width: 20%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("../Images/circle-with-check-symbol.png");
+    right: 5%;
+    top: 25%;
+}
+#bot_cancel {
+    position: absolute;
+    height: 5.2%;
+    width: 20%;
+    left: 10%;
+    top: 91.2%;
+    margin-bottom: 4%;
+    text-align: left;
+    background-color: #B71C1C;
+    border: none;
+    box-shadow: 0px 6px 13px 0px rgba(0,0,0,0.75);
+    outline: none;
+}
+#img_cancel {
+    position: absolute;
+    height: 50%;
+    width: 20%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("../Images/clear-button.png");
+    right: 5%;
+    top: 25%;
+}
+#bot_cancel:hover {
+    background-color: #FEFEFE;
+}

@@ -1,52 +1,35 @@
 <html>
     <head>
-        <link rel="stylesheet" href="style-index.css">
+        <link rel="stylesheet" href="Style/style-index.css">
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js">
         </script>
+        <script src="Scripts/script_registro.js"></script>
         <link href='https://fonts.googleapis.com/css?family=Playfair Display SC' rel='stylesheet'>
+        <link href="Style/registro.css" rel="stylesheet">
     </head>
 <body ng-app="myITV">
     <div id="bloquear" ng-controller="myCTRL" ng-click="cerrar_menu()"></div>
     <div id="menu">
         <div id="menu_items">
-        <div class="menu_item"><a href="#">Registrarse</a><img src="add-user-button.png" class="img_item_menu"></div>
+        <div class="menu_item"><a href="#">Registrarse</a><img src="Images/add-user-button.png" class="img_item_menu"></div>
         <br>
-        <div class="menu_item"><a href="#" >Iniciar</a><img src="play-button-inside-a-circle.png" class="img_item_menu"></div>    
+        <div class="menu_item"><a href="#" >Entrar</a><img src="Images/play-button-inside-a-circle.png" class="img_item_menu"></div>    
 
         </div>
     </div>
-        <div id="cabeza">
-            <div id="img_menu" ng-controller="myCTRL" ng-click="abrir_menu()"></div>
-            <div id="social">
-                <a href="https://twitter.com/?lang=es" target="_blank"><img src="twitter.png" class="img_social"></a>
-                <a href="https://es-es.facebook.com/" target="_blank"><img src="facebook.png" class="img_social"></a>
-                <a href="https://www.instagram.com/_tine_es/?hl=es" target="_blank"><img src="instagram.png" class="img_social"></a>
-                <a href="https://www.youtube.com" target="_blank"><img src="youtube.png" class="img_social"></a>
-            </div>
-            <h1 id="name">ITV</h1>
+    <div id="cabeza">
+        <div id="img_menu" ng-controller="myCTRL" ng-click="abrir_menu()"></div>
+        <div id="social">
+            <a href="https://twitter.com/?lang=es" target="_blank"><img src="Images/twitter.png" class="img_social"></a>
+            <a href="https://es-es.facebook.com/" target="_blank"><img src="Images/facebook.png" class="img_social"></a>
+            <a href="https://www.instagram.com/_tine_es/?hl=es" target="_blank"><img src="Images/instagram.png" class="img_social"></a>
+            <a href="https://www.youtube.com" target="_blank"><img src="Images/youtube.png" class="img_social"></a>
+        </div>
+        <h1 id="name">ITV</h1>
 
-        </div>    
+    </div>
+    <br><br>
     
-    
-
-    <script>
-    var menu_on = false;    
-    var app = angular.module("myITV", []);
-        app.controller("myCTRL", function($scope) {
-            $scope.abrir_menu = function() {
-                    document.getElementById('menu').classList.add("mov_out");
-                    document.getElementById('bloquear').style.display = "block";
-                    document.getElementById('img_menu').style.display = "none"; setTimeout("document.getElementById('menu').classList.remove('mov_in')", 800);
-                           
-            };
-            $scope.cerrar_menu = function() {
-                document.getElementById('menu').classList.add("mov_in");
-                document.getElementById('bloquear').style.display = "none";
-                document.getElementById('img_menu').style.display = "block";
-                document.getElementById('menu').classList.remove("mov_out");
-            };
-            
-        });
-    </script>
+    <!-- un coment -->
 </body>
 </html>
