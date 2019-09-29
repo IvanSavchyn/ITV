@@ -1,10 +1,8 @@
-
-#datos {
+#div_login {
     position: relative;
-    width: 50%;
-    height: 150%;;
-    top: 5%;
-    left: 25%;
+    width: 40%;
+    height: 70%;
+    left: 30%;
     border: 1px solid #BEBEBE;
     border-radius: 5px;
     background-color: #FAFAFA;
@@ -20,62 +18,43 @@
     outline: none;
     
 }
-h3 {
-    position: relative;
-    width: 40%;
-    left: 25%;
-    text-align: left;
-}
 h2 {
+    position: relative;
+    width: 30%;
+    left: 35%;
+    text-align: center;
+}
+h3 {
     position: relative;
     width: 50%;
     left: 25%;
-    text-align: center;
-}
-select {
-    position: relative;
-    width: 10%;
-    left: 25%;
     text-align: left;
+    
 }
-.part_datos {
-    text-align: right;
-}
-input {
-    outline: none;
-    background-color: #ECECEC;
-    border: none;
-    border-bottom: 1px solid black;
-}
-#bot_registrar {
-    position: relative;
-    width: 20%;
-    height: 5%;
+#bot_entrar {
+    position: absolute;
+    width: 25%;
+    height: 10%;
     bottom: 10%;
     left: 70%;
-    margin-top: 6%;
     border: 1px solid #B71C1C;
     border-radius: 7px;
     background-color:  transparent;
     font-size: 20px;
     outline: none;
 }
-#bot_registrar:hover {
+#bot_entrar:hover {
     background-color: #B71C1C;
 }
-#bot_cancel {
+#bot_registrar {
     position: absolute;
-    width: 20%;
-    height: 5.3%;
-    bottom: 2%;
-    left: 10%;
-    border: 1px solid #ECECEC;
+    width: 25%;
+    height: 10%;
+    bottom: 10%;
+    left: 5%;
+    border: none;
     border-radius: 7px;
     background-color:  transparent;
-    font-size: 20px;
+    font-size: 15px;
     outline: none;
 }
-#bot_cancel:hover {
-    background-color: #ECECEC;
-}
-

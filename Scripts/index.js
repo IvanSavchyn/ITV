@@ -15,3 +15,11 @@ var menu_on = false;
                 document.getElementById('menu').classList.remove("mov_out");
             };
         });
+        app.controller("go_to", function($scope) {
+           $scope.open_login = function() {
+               document.location.href = "entrar.html";
+           }; 
+           $scope.open_registr = function() {
+               document.location.href = "registro.html";
+           };
+        });
