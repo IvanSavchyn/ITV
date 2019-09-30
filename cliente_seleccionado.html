@@ -5,7 +5,7 @@
         </script>
         <script src="Scripts/index.js"></script>
         <link href='https://fonts.googleapis.com/css?family=Playfair Display SC' rel='stylesheet'>
-        <link href="Style/style-home.css" rel="stylesheet">
+        <link href="Style/style-cliente-seleccionado.css" rel="stylesheet">
     </head>
 <body ng-app="myITV">
     <div id="bloquear" ng-controller="myCTRL" ng-click="cerrar_menu()"></div>
@@ -29,35 +29,28 @@
 
     </div>
 
-    <h2>Mis datos</h2>
+    <h2>Cliente</h2>
     <div id="div_datos">
         <div id="div_datos_1" class="datos">
             <h3>DNI</h3>
-            <input type="text" class="inputs" disabled><br>
-            <h3>Nombre</h3>
             <input type="text" class="inputs"><br>
-            <h3>Apellidos</h3>
+            <h3>Email</h3>
             <input type="text" class="inputs"><br>
         </div>
         <div id="div_datos_2" class="datos">
-            <h3>Email</h3>
+            <h3>Nombre</h3>
             <input type="text" class="inputs"><br>
             <h3>Telefono</h3>
             <input type="text" class="inputs"><br>
-            <h3>Dirección</h3>
-            <input type="text" class="inputs"><br>
         </div>
         <div id="div_datos_3" class="datos">
-            <h3>Contraseña</h3>
-            <input type="password" class="inputs"><br>
-            <h3>Nueva contraseña</h3>
-            <input type="text" class="inputs"><br>
-            <h3>Repetir Contraseña</h3>
+            <h3>Apellidos</h3>
             <input type="text" class="inputs"><br>
         </div>
         <button id="bot_modificar">Modificar</button>
+        <button id="bot_eliminar_cliente">Eliminar</button>
     </div>
-    <h2>Mis coches</h2>
+    <h2>Coches</h2>
     <div class="div_coches">
         <div class="coche">
             <div class="coche_1">
@@ -80,8 +73,7 @@
         </div>
         
         <div id="noHayCoches">
-            <p style="position: relative; top: 20%; left: 20%;">Todavia no tienes coche registrado!</p>
-            <button id="bot_registrar">Registrar</button>
+            <p style="position: relative; top: 20%; left: 20%;">Cliente no tiene coches registrados!</p>
         </div>
     </div>
 

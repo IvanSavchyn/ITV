@@ -1,7 +1,8 @@
-#div_datos {
+#barra_buscar {
     position: relative;
     width: 90%;
-    height: 65%;
+    height: 33%;
+    top: 5%;
     left: 5%;
     border: 1px solid #BEBEBE;
     border-radius: 5px;
@@ -32,25 +33,34 @@ h3 {
     text-align: left;
     
 }
-#bot_modificar {
+#bot_buscar {
     position: absolute;
-    width: 15%;
-    height: 10%;
-    bottom: 9%;
-    left: 80%;
+    width: 16.64%;
+    height: 22%;
+    bottom: 11%;
+    left: 75%;
     border: 1px solid #B71C1C;
     border-radius: 7px;
     background-color:  transparent;
     font-size: 20px;
     outline: none;
 }
-#bot_modificar:hover {
+#bot_buscar:hover {
     background-color: #B71C1C;
+}
+#limpiar_campos {
+    position: absolute;
+    left: 97%;
+    top: 5%;
+    width: 5%;
+    height: 10%;
+    background-image: url("../Images/clear-button.png");
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 .datos {
     width: 33.37%;
     height: 72%;
-    border-bottom: 1px solid #BEBEBE;
 }
 #div_datos_1 {
     position: absolute;
@@ -66,13 +76,14 @@ h3 {
     position: absolute;
     top: 0%;
     left: 66.6%;
-    border-left: 1px solid #BEBEBE;
+
 }
 
-.div_coches {
+.div_clientes {
     position: relative;
     width: 90%;
     height: auto;
+    top: 10%;
     left: 5%;
     margin-bottom: 5%;
     border: 1px solid #BEBEBE;
@@ -80,22 +91,7 @@ h3 {
     background-color: #FAFAFA;
     box-shadow: 0px 4px 10px 2px rgba(0,0,0,0.75);
 }
-.coche {
-    position: relative;
-    margin: 1%;
-    margin-left: 2.5%;
-    width: 95%;
-    height: 25%;
-    border: 1px solid #BEBEBE;
-    border-radius: 5px;
-    top: 10%;
-}
-.text_coche {
-    position: relative;
-    width: auto;
-    left: 0%;
-    text-align: center;
-}
+
 .inputs_2 {
     position: absolute;
     width: 70%;
@@ -106,58 +102,42 @@ h3 {
     border-radius: 3px;
     outline: none;
 }
-.coche_1 {
+
+.cliente {
+    position: relative;
+    margin: 1%;
+    margin-left: 2.5%;
+    width: 95%;
+    height: 25%;
+    border: 1px solid #BEBEBE;
+    border-radius: 5px;
+    top: 10%;
+}
+.cliente_1 {
     position: absolute;
     width: 27%;
     height: 100%;
     left: 0%;
 }
-.coche_2 {
+.cliente_2 {
     position: absolute;
     width: 27%;
     height: 100%;
     left: 27%;
 
 }
-.coche_3 {
+.cliente_3 {
     position: absolute;
     width: 27%;
     height: 100%;
     left: 54%;
 
 }
-.select_tipo_coche {
-    position: absolute;
-    width: 70%;
-    left: 15%;;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #BEBEBE;
-    border-radius: 3px;
-    outline: none;
-}
-.bot_eliminar_coche {
+.bot_abrir_cliente {
     position: absolute;
     width: 15%;
     height: 30%;
-    bottom: 10%;
-    left: 83%;
-    border: 1px solid #BEBEBE;
-    border-radius: 7px;
-    background-color:  transparent;
-    font-size: 20px;
-    outline: none;
-}
-.bot_eliminar_coche:hover {
-    background-color: #BEBEBE;
-    border-color: #B71C1C;
-}
-
-.bot_modificar_coche {
-    position: absolute;
-    width: 15%;
-    height: 30%;
-    top: 10%;
+    top: 34%;
     left: 83%;
     border: 1px solid #B71C1C;
     border-radius: 7px;
@@ -165,36 +145,26 @@ h3 {
     font-size: 20px;
     outline: none;
 }
-.bot_modificar_coche:hover {
+.bot_abrir_cliente:hover {
     background-color: #B71C1C;
 }
-#noHayCoches {
+
+
+#noHayClientes {
     position: relative;
     width: 95%;
     height: 25%;
-    top: 10%;
+    top: 30%;
     margin: 1%;
     margin-left: 2.5%;
     border: 1px solid #BEBEBE;
     border-radius: 5px;
     font-size: 30px;
 }
-#bot_registrar {
-    position: absolute;
-    width: 15%;
-    height: 30%;
-    top: 35%;
-    left: 72%;
-    border: 1px solid #B71C1C;
-    border-radius: 7px;
-    background-color:  transparent;
-    font-size: 20px;
-    outline: none;
+#textNoHayClientes {
+    position: absolute; 
+    top: 20%; 
+    left: 30%; 
+    width: 40%; 
+    text-align: center;
 }
-#bot_registrar:hover {
-    background-color: #B71C1C;
-}
-
-
-
-

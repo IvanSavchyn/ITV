@@ -1,7 +1,7 @@
 #div_datos {
     position: relative;
     width: 90%;
-    height: 65%;
+    height: 35%;
     left: 5%;
     border: 1px solid #BEBEBE;
     border-radius: 5px;
@@ -34,10 +34,10 @@ h3 {
 }
 #bot_modificar {
     position: absolute;
-    width: 15%;
-    height: 10%;
-    bottom: 9%;
-    left: 80%;
+    width: 16.64%;
+    height: 15%;
+    bottom: 11%;
+    left: 75%;
     border: 1px solid #B71C1C;
     border-radius: 7px;
     background-color:  transparent;
@@ -47,10 +47,27 @@ h3 {
 #bot_modificar:hover {
     background-color: #B71C1C;
 }
+
+#bot_eliminar_cliente {
+    position: absolute;
+    width: 16.64%;
+    height: 15%;
+    bottom: 33%;
+    left: 75%;
+    border: 1px solid #BEBEBE;
+    border-radius: 7px;
+    background-color:  transparent;
+    font-size: 20px;
+    outline: none;
+}
+#bot_eliminar_cliente:hover {
+    background-color: #BEBEBE;
+    border-color: #B71C1C;
+}
+
 .datos {
     width: 33.37%;
     height: 72%;
-    border-bottom: 1px solid #BEBEBE;
 }
 #div_datos_1 {
     position: absolute;
@@ -66,7 +83,6 @@ h3 {
     position: absolute;
     top: 0%;
     left: 66.6%;
-    border-left: 1px solid #BEBEBE;
 }
 
 .div_coches {
@@ -194,7 +210,3 @@ h3 {
 #bot_registrar:hover {
     background-color: #B71C1C;
 }
-
-
-
-
