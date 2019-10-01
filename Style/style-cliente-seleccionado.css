@@ -101,7 +101,8 @@ h3 {
     margin: 1%;
     margin-left: 2.5%;
     width: 95%;
-    height: 25%;
+    min-height: 40%;
+    height: auto;
     border: 1px solid #BEBEBE;
     border-radius: 5px;
     top: 10%;
@@ -155,8 +156,8 @@ h3 {
 .bot_eliminar_coche {
     position: absolute;
     width: 15%;
-    height: 30%;
-    bottom: 10%;
+    height: 17%;
+    bottom: 55.3%;
     left: 83%;
     border: 1px solid #BEBEBE;
     border-radius: 7px;
@@ -172,8 +173,8 @@ h3 {
 .bot_modificar_coche {
     position: absolute;
     width: 15%;
-    height: 30%;
-    top: 10%;
+    height: 17%;
+    top: 5.3%;
     left: 83%;
     border: 1px solid #B71C1C;
     border-radius: 7px;
@@ -209,4 +210,54 @@ h3 {
 }
 #bot_registrar:hover {
     background-color: #B71C1C;
+}
+
+.veh_inf {
+    position: absolute;
+    width: auto;
+    background-color: #FAFAFA;
+    top: 0.5%;
+    left: 5%;
+    margin: 0%;
+    padding-left: 1%;
+    padding-right: 1%;
+    z-index: 1;
+}
+.pago_inf {
+    position: absolute;
+    width: auto;
+    background-color: #FAFAFA;
+    bottom: 47%;
+    left: 2.5%;
+    margin: 0%;
+    padding-left: 1%;
+    padding-right: 1%;
+    z-index: 1;
+
+}
+.div_pago {
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    bottom: 0%;
+    margin: 0%;
+    border-top: 1px solid #BEBEBE;
+}
+.pago_1 {
+    position: absolute;
+    width: 33.3%;
+    height: 100%;
+    left: 0%;
+}
+.pago_2 {
+    position: absolute;
+    width: 33.3%;
+    height: 100%;
+    left: 33.3%;
+}
+.pago_3 {
+    position: absolute;
+    width: 33.4%;
+    height: 100%;
+    left: 66.6%;
 }
