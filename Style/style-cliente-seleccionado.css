@@ -196,21 +196,16 @@ h3 {
     border-radius: 5px;
     font-size: 30px;
 }
-#bot_registrar {
-    position: absolute;
-    width: 15%;
-    height: 30%;
+.noHayCochesText {
+    position: relative;
     top: 35%;
-    left: 72%;
-    border: 1px solid #B71C1C;
-    border-radius: 7px;
-    background-color:  transparent;
-    font-size: 20px;
-    outline: none;
+    width: 100%; 
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+    font-size: 130%;
 }
-#bot_registrar:hover {
-    background-color: #B71C1C;
-}
+
 
 .veh_inf {
     position: absolute;
@@ -245,19 +240,34 @@ h3 {
 }
 .pago_1 {
     position: absolute;
-    width: 33.3%;
+    width: 25%;
     height: 100%;
     left: 0%;
 }
 .pago_2 {
     position: absolute;
-    width: 33.3%;
+    width: 25%;
     height: 100%;
-    left: 33.3%;
+    left: 25%;
 }
 .pago_3 {
     position: absolute;
-    width: 33.4%;
+    width: 25%;
     height: 100%;
-    left: 66.6%;
+    left: 50%;
+}
+.pago_4 {
+    position: absolute;
+    width: 25%;
+    height: 100%;
+    left: 75%;
+}
+.p_no_realizado {
+    position: relative;
+    top: 35%;
+    width: 100%; 
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+    font-size: 200%;
 }
