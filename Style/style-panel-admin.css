@@ -1,0 +1,239 @@
+body {
+    padding-bottom: 2%;
+}
+
+.inputs {
+    position: relative;
+    width: 50%;
+    left: 25%;;
+    padding: 10px;
+    border: 1px solid #BEBEBE;
+    border-radius: 3px;
+    outline: none;
+    
+}
+h2 {
+    position: relative;
+    width: 30%;
+    left: 0%;
+    margin-top: 5%;
+    text-align: center;
+}
+h3 {
+    position: relative;
+    width: 50%;
+    left: 25%;
+    text-align: left;
+    
+}
+.bot_insertar {
+    position: absolute;
+    width: 15%;
+    height: 30%;
+    bottom: 35%;
+    left: 80%;
+    border: 1px solid #B71C1C;
+    border-radius: 7px;
+    background-color:  transparent;
+    font-size: 20px;
+    outline: none;
+}
+.bot_insertar:hover {
+    background-color: #B71C1C;
+}
+
+.bot_eliminar {
+    position: absolute;
+    width: 15%;
+    height: 30%;
+    bottom: 35%;
+    left: 80%;
+    border: 1px solid #BEBEBE;
+    border-radius: 7px;
+    background-color:  transparent;
+    font-size: 20px;
+    outline: none;
+}
+.bot_eliminar:hover {
+    background-color: #BEBEBE;
+    border-color: #B71C1C;
+}
+
+.datos {
+    width: 90%;
+    height: 72%;
+}
+.div_datos_1 {
+    position: absolute;
+    width: 25%;
+    top: 0%;
+    left: 0%;
+}
+.div_datos_2 {
+    position: absolute;
+    width: 25%;
+    top: 0%;
+    left: 25%;
+}
+.div_datos_3 {
+    position: absolute;
+    width: 25%;
+    top: 0%;
+    left: 50%;
+}
+.insert_parqueadero {
+    position: absolute;
+    width: auto;
+    background-color: #FAFAFA;
+    top: -10%;
+    left: 5%;
+    margin: 0%;
+    padding-left: 1%;
+    padding-right: 1%;
+    z-index: 1;
+}
+.inf_parqueaderos {
+    position: absolute;
+    width: auto;
+    background-color: #FAFAFA;
+    top: 4%;
+    left: 7%;
+    margin: 0%;
+    padding-left: 1%;
+    padding-right: 1%;
+    z-index: 1;
+}
+.insertar {
+    position: relative;
+    width: 90%;
+    height: 20%;
+    left: 5%;
+    margin-top: 2%;
+    border: 1px solid #BEBEBE;
+    border-radius: 5px;
+    background-color: #FAFAFA;
+}
+#parqueaderos {
+    position: relative;
+    width: 90%;
+    height: auto;
+    left: 5%;
+    margin-top: 2%;
+    padding-bottom: 2%;
+    border: 1px solid #BEBEBE;
+    border-radius: 5px;
+    background-color: #FAFAFA;
+    box-shadow: 0px 4px 10px 2px rgba(0,0,0,0.75);
+}
+.parqueadero {
+    position: relative;
+    width: 100%;
+    height: 18%;
+    background-color: #FAFAFA;
+}
+.div_parqueaderos {
+   position: relative;
+    width: 90%;
+    height: auto;
+    left: 5%;
+    margin-top: 2%;
+    padding-bottom: 2%;
+    border: 1px solid #BEBEBE;
+    border-radius: 5px;
+    background-color: #FAFAFA;
+    
+}
+
+.bahias {
+    position: relative;
+    width: 90%;
+    height: auto;
+    left: 5%;
+    margin-top: 2%;
+    padding-bottom: 2%;
+    border: 1px solid #BEBEBE;
+    border-radius: 5px;
+    background-color: #FAFAFA;
+    box-shadow: 0px 4px 10px 2px rgba(0,0,0,0.75);
+}
+.div_bahias {
+    position: relative;
+    width: 90%;
+    height: auto;
+    left: 5%;
+    margin-top: 2%;
+    padding-bottom: 2%;
+    border: 1px solid #BEBEBE;
+    border-radius: 5px;
+    background-color: #FAFAFA;
+}
+.bahia {
+    position: relative;
+    width: 100%;
+    height: 18%;
+    background-color: #FAFAFA;
+}
+.bot_modificar {
+   position: absolute;
+    width: 15%;
+    height: 30%;
+    bottom: 5%;
+    left: 80%;
+    border: 1px solid #B71C1C;
+    border-radius: 7px;
+    background-color:  transparent;
+    font-size: 20px;
+    outline: none;
+}
+.bot_modificar:hover {
+    background-color: #B71C1C;
+}
+.bot_eliminar_bahia {
+    position: absolute;
+    width: 15%;
+    height: 30%;
+    top: 20%;
+    left: 80%;
+    border: 1px solid #BEBEBE;
+    border-radius: 7px;
+    background-color:  transparent;
+    font-size: 20px;
+    outline: none;
+}
+.bot_eliminar_bahia:hover {
+    background-color: #BEBEBE;
+    border-color: #B71C1C;
+}
+.tarifas {
+    position: relative;
+    width: 90%;
+    height: auto;
+    left: 5%;
+    margin-top: 2%;
+    padding-bottom: 2%;
+    border: 1px solid #BEBEBE;
+    border-radius: 5px;
+    background-color: #FAFAFA;
+    box-shadow: 0px 4px 10px 2px rgba(0,0,0,0.75);
+}
+.tarifa {
+    position: relative;
+    width: 90%;
+    height: 20%;
+    left: 5%;
+    margin-top: 2%;
+    border: 1px solid #BEBEBE;
+    border-radius: 5px;
+    background-color: #FAFAFA;
+    
+}
+.selecT {
+    position: absolute;
+    width: 70%;
+    left: 15%;;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #BEBEBE;
+    border-radius: 3px;
+    outline: none;
+}

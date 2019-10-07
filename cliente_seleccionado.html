@@ -6,14 +6,19 @@
         <script src="Scripts/index.js"></script>
         <link href='https://fonts.googleapis.com/css?family=Playfair Display SC' rel='stylesheet'>
         <link href="Style/style-cliente-seleccionado.css" rel="stylesheet">
+        <meta charset="UTF-8">
     </head>
 <body ng-app="myITV">
     <div id="bloquear" ng-controller="myCTRL" ng-click="cerrar_menu()"></div>
     <div id="menu">
         <div id="menu_items">
-        <div class="menu_item" ng-controller="go_to" ng-click="open_registr()"><a href="registro.html">Registrar vehiculo</a><img src="Images/add-user-button.png" class="img_item_menu"></div>
-        <br>
-        <div class="menu_item" ng-controller="go_to" ng-click="open_login()"><a href="entrar.html">Entrar</a><img src="Images/play-button-inside-a-circle.png" class="img_item_menu"></div>
+        <div class="menu_item" ng-controller="go_to" ng-click="open_registr()"><a href="#">Registrar cliente</a><img src="Images/add-user-button.png" class="img_item_menu"></div>
+        <div class="menu_item" ng-controller="go_to" ng-click="open_registrar_vehiculo()"><a href="registro.html">Registrar vehiculo</a><img src="Images/add-plus-button.png" class="img_item_menu"></div>
+        <div class="menu_item" ng-controller="go_to" ng-click="open_clientes()"><a href="#">Clientes</a><img src="Images/two-men.png" class="img_item_menu"></div>
+        <div class="menu_item" ng-controller="go_to" ng-click="open_validar_cliente()"><a href="#">Validar cliente</a><img src="Images/verification-mark.png" class="img_item_menu"></div>
+        <div class="menu_item" ng-controller="go_to" ng-click="open_validar_coches()"><a href="#">Validar Coches</a><img src="Images/front-car.png" class="img_item_menu"></div>
+        <div class="menu_item" ng-controller="go_to" ng-click="open_config()"><a href="#">Configuracion</a><img src="Images/settings-cogwheel-button.png" class="img_item_menu"></div>
+        <div class="menu_item" ng-controller="go_to" ng-click="salir()"><a href="#">Salir</a><img src="Images/settings-cogwheel-button.png" class="img_item_menu"></div>
 
         </div>
     </div>
@@ -93,6 +98,27 @@
                 <!--
                 <p class="p_no_realizado">Pago no realizado!</p>
                 -->
+            </div>
+            <p class="inf_parqueadero">Informacion del parqueadero</p>
+            <div class="div_parqueadero">
+                
+                <div class="parqueadero">
+                    <h3 class="text_coche">Parqueadero</h3>
+                    <select class="select_parqueadero">
+                        <option value="privado">Calle 12</option>
+                        <option value="publico">calle 13</option>
+                    </select>
+                </div>
+                <div class="bahia">
+                    <h3 class="text_coche">Bahia</h3>
+                    <select class="select_bahia">
+                        <option value="privado">1</option>
+                        <option value="publico">2</option>
+                    </select>
+                </div>
+                <button class="bot_asignar">Asignar parqueadero</button>
+                
+                
             </div>
             
         </div>

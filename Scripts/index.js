@@ -22,4 +22,19 @@ var menu_on = false;
            $scope.open_registr = function() {
                document.location.href = "registro.html";
            };
+            $scope.open_registrar_vehiculo = function() {
+                document.location.href = "registrar_vehiculo.html";
+            };
+            $scope.open_clientes = function() {
+                document.location.href = "clientes.html";
+            }
+            $scope.open_validar_cliente = function() {
+                document.location.href = "validar_usuario.html";
+            }
+            $scope.open_validar_coches = function() {
+                document.location.href = "validar_coches.html";
+            }
+            $scope.open_config = function() {
+                document.location.href = "panel_admin.html";
+            }
         });

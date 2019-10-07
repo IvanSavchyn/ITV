@@ -101,7 +101,7 @@ h3 {
     margin: 1%;
     margin-left: 2.5%;
     width: 95%;
-    min-height: 40%;
+    min-height: 60%;
     height: auto;
     border: 1px solid #BEBEBE;
     border-radius: 5px;
@@ -156,8 +156,8 @@ h3 {
 .bot_eliminar_coche {
     position: absolute;
     width: 15%;
-    height: 17%;
-    bottom: 55.3%;
+    height: 10%;
+    top: 19.3%;
     left: 83%;
     border: 1px solid #BEBEBE;
     border-radius: 7px;
@@ -173,7 +173,7 @@ h3 {
 .bot_modificar_coche {
     position: absolute;
     width: 15%;
-    height: 17%;
+    height: 10%;
     top: 5.3%;
     left: 83%;
     border: 1px solid #B71C1C;
@@ -222,7 +222,7 @@ h3 {
     position: absolute;
     width: auto;
     background-color: #FAFAFA;
-    bottom: 47%;
+    top: 31%;
     left: 2.5%;
     margin: 0%;
     padding-left: 1%;
@@ -233,8 +233,8 @@ h3 {
 .div_pago {
     position: absolute;
     width: 100%;
-    height: 50%;
-    bottom: 0%;
+    height: 33.3%;
+    bottom: 33.3%;
     margin: 0%;
     border-top: 1px solid #BEBEBE;
 }
@@ -270,4 +270,79 @@ h3 {
     padding: 0px;
     text-align: center;
     font-size: 200%;
+}
+.div_parqueadero {
+    position: absolute;
+    width: 100%;
+    height: 33.3%;
+    bottom: 0%;
+    margin: 0%;
+    border-top: 1px solid #BEBEBE;
+}
+.inf_parqueadero{
+    position: absolute;
+    width: auto;
+    background-color: #FAFAFA;
+    top: 64%;
+    left: 2.5%;
+    margin: 0%;
+    padding-left: 1%;
+    padding-right: 1%;
+    z-index: 1;
+}
+.parqueadero {
+    position: absolute;
+    width: 33.3%;
+    height: 100%;
+    left: 0%;
+}
+.bahia {
+    position: absolute;
+    width: 33.3%;
+    height: 100%;
+    left: 33.3%;
+}
+.park_no_asignado {
+    position: relative;
+    top: 35%;
+    width: 80%; 
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+    font-size: 200%;
+}
+.select_parqueadero {
+    position: absolute;
+    width: 70%;
+    left: 15%;;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #BEBEBE;
+    border-radius: 3px;
+    outline: none;
+}
+.select_bahia {
+    position: absolute;
+    width: 70%;
+    left: 15%;;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #BEBEBE;
+    border-radius: 3px;
+    outline: none;
+}
+.bot_asignar {
+    position: absolute;
+    width: 20%;
+    height: 35%;
+    top: 30%;
+    left: 75%;
+    border: 1px solid #B71C1C;
+    border-radius: 7px;
+    background-color:  transparent;
+    font-size: 20px;
+    outline: none;
+}
+.bot_asignar:hover {
+    background-color: #B71C1C;
 }

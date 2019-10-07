@@ -5,7 +5,7 @@
         </script>
         <script src="Scripts/index.js"></script>
         <link href='https://fonts.googleapis.com/css?family=Playfair Display SC' rel='stylesheet'>
-        <link href="Style/style-clientes.css" rel="stylesheet">
+        <link href="Style/style-validar-coches.css" rel="stylesheet">
         <meta charset="UTF-8">
     </head>
 <body ng-app="myITV">
@@ -33,47 +33,34 @@
         <h1 id="name">ITV</h1>
 
     </div>
-    <div id="barra_buscar">
+
+    
+    <h2>Coches</h2>
+    <div id="div_datos">
         <div id="div_datos_1" class="datos">
-            <h3>DNI</h3>
-            <input type="text" class="inputs"><br>
-            <h3>Email</h3>
-            <input type="text" class="inputs"><br>
+            <h3>Matricula</h3>
+            <input disabled type="text" class="inputs"><br>
+            <h3>Marca</h3>
+            <input disabled type="text" class="inputs"><br>
+            <h3>Tipo de vehiculo</h3>
+            <input disabled type="text" class="inputs"><br>
         </div>
         <div id="div_datos_2" class="datos">
+            <h3>DNI del dueño</h3>
+            <input disabled type="text" class="inputs"><br>
             <h3>Nombre</h3>
-            <input type="text" class="inputs"><br>
-            <h3>Telefono</h3>
-            <input type="text" class="inputs"><br>
-        </div>
-        <div id="div_datos_3" class="datos">
+            <input disabled type="text" class="inputs"><br>
             <h3>Apellidos</h3>
-            <input type="text" class="inputs"><br>
+            <input disabled type="text" class="inputs"><br>
         </div>
-        <button id="bot_buscar">Buscar</button>
-        <div id="limpiar_campos"></div>
-    </div>
-    
-    <div class="div_clientes">
-        <div class="cliente">
-            <div class="cliente_1">
-                <h3 class="text_coche">DNI</h3>
-                <input type="text" class="inputs_2" disabled value="x1234567Y"><br>
-            </div>
-            <div class="cliente_2">
-                <h3 class="text_coche">Nombre</h3>
-                <input type="text" class="inputs_2" disabled value="Neil"><br>
-            </div>
-            <div class="cliente_3">
-                <h3 class="text_coche">Apellidos</h3>
-                <input type="text" class="inputs_2" disabled value="Armstrong"><br>
-            </div>
-            <button class="bot_abrir_cliente">Abrir</button>
-        </div>
-        <div id="noHayClientes">
-            <p id="textNoHayClientes">No hay clientes!</p>
-        </div>
+        <button id="bot_eliminar_coche">Eliminar</button>
+        <button id="bot_aceptar">Aceptar</button>
     </div>
 
+    
+    
+    
+
+    <!-- un coment -->
 </body>
 </html>
