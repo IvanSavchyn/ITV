@@ -1,0 +1,13 @@
+CREATE DATABASE itv;
+CREATE TABLE tipoVehiculos(
+    idTipo VARCHAR(3) NOT NULL,
+    clase VARCHAR(10) NOT NULL UNIQUE,
+    PRIMARY KEY (idTipo)
+);
+CREATE TABLE tarifas (
+    idTarifa VARCHAR(3),
+    costo NUMERIC(6,2) NOT NULL,
+    idTipo VARCHAR(3) NOT NULL,
+    PRIMARY KEY (idTarifa),
+    FOREIGN KEY (idTipo) REFERENCES tipoVehiculos(idTipo) ON DELETE SET NULL ON UPDATE CASCADE
+);
