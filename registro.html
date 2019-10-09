@@ -1,11 +1,13 @@
 <html>
     <head>
         <link rel="stylesheet" href="Style/style-index.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js">
-        </script>
-        <script src="Scripts/index.js"></script>
         <link href='https://fonts.googleapis.com/css?family=Playfair Display SC' rel='stylesheet'>
         <link href="Style/registro.css" rel="stylesheet">
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script src="Scripts/index.js"></script>
+        <script src="Scripts/script-registro.js"></script>
+      
         <meta charset="UTF-8">
     </head>
 <body ng-app="myITV">
@@ -31,21 +33,16 @@
     </div>
     <div id="datos">
         <h2>Crear tu cuenta de ITV</h2>
-        <h3>Documento</h3>
-                    <select id="tipo_doc">
-                        <option value="DNI">DNI</option>
-                        <option value="NIE">NIE</option>
-                    </select><br><br>
-                    <input id="doc" type="text" class="inputs"><br>
-         
+        <h3>DNI</h3>
+            <input id="dni" type="text" class="inputs"><br>
         <h3>Nombre</h3>
             <input id="nombre" type="text" class="inputs">
         <h3>Apellidos</h3>
             <input id="apellidos" type="text" class="inputs">
         <h3>Email</h3>
-            <input id="text" type="email" class="inputs">
+            <input id="email" type="email" class="inputs">
         <h3>Telefono</h3>
-            <input type="text" id="tel" class="inputs">
+            <input type="tel" id="telefono" class="inputs">
         <h3>Dirección</h3>
             <input id="direccion" type="text" class="inputs">
         <h3>Contraseña</h3>
@@ -54,7 +51,7 @@
             <input id="contr2" type="password" class="inputs">
 
         <button id="bot_cancel" class="imgs">Cancelar</button>
-        <br><br><button id="bot_registrar" class="imgs">Registrarte</button>
+        <br><br><button id="bot_registrar" class="imgs" ng-controller="registro" ng-click="registrar()">Registrarte</button>
     </div>
     <br><br><br>
     
