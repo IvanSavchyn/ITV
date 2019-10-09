@@ -1,6 +1,6 @@
 
 <?php 
-    public class PersonaVo {
+    class PersonaVo {
         private $dni;
         private $nombre;
         private $apellidos;
@@ -10,7 +10,7 @@
         private $contrasenia;
         private $nuevaContrasenia;
         
-        public function __construct($dni, $nombre, $apellidos, $email, $telefono $direccion, $contrasenia, $nuevaContrasenia) {
+        public function __construct($dni, $nombre, $apellidos, $email, $telefono, $direccion, $contrasenia, $nuevaContrasenia) {
             $this->dni = $dni;
             $this->nombre = $nombre;
             $this->apellidos = $apellidos;

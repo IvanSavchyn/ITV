@@ -45,16 +45,13 @@
             
             if(valido) {
                 
-                datos.pop();
+               
                  var enviar = "";
-                for(var i = 0; i < datos.length; i++) {
-                    enviar += datos[i].nombre + "=" + datos[i].valor;
-                    if(i != datos.length - 1){
-                        enviar += "&";
-                    }
+                for(var i = 0; i < datos.length - 1; i++) {
+                    enviar += datos[i].nombre + "=" + datos[i].valor + "&";
                 }
-                console.log(enviar);
-                enviarDatos("chrome.extension.getURL('../ScriptsPHP/www.php')", enviar);
+                
+                enviarDatos("ScriptsPHP/index.php", enviar + "function=registrar");
             }
             
 
@@ -69,10 +66,9 @@ function enviarDatos(archivo, enviar) {
     }
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-           console.log(this.responseText);alert("1");
-    }else {
-        alert(this.statusText);
+           console.log(this.responseText);
     }
+        
        
         
   

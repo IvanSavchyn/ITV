@@ -1,5 +1,5 @@
 <?php 
-    public class TarifaVo {
+    class TarifaVo {
         private $id;
         private $costo;
         private $idTipo;

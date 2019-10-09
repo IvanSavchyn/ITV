@@ -1,5 +1,5 @@
 <?php 
-    public class TipoVehiculoVo {
+    class TipoVehiculoVo {
         private $id;
         private $clase;
         

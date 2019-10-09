@@ -1,5 +1,5 @@
 <?php 
-    public class BahiaVo {
+    class BahiaVo {
         private $idBahia;
         private $idParqueadero;
         private $disponible;
