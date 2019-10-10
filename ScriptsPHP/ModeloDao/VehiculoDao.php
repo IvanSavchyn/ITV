@@ -52,6 +52,7 @@
             }
         }
         public function getCochesCliente($dni) {
+            include 'ScriptsPHP/ModeloVo/VehiculoVo.php';
             $consulta = "SELECT * FROM vehiculos WHERE idPersona = '" . $dni . "'";
             $result = mysqli_query($this->bd, $consulta);
             if(mysqli_num_rows($result) == 0) {
@@ -60,7 +61,7 @@
             else {
                 $coches = array();
                 while($row = mysqli_fetch_assoc($result)) {
-                    $vehiculo = new VehiculoVo($row["matricula"], $row["marca"], $row["aceptado"], $row["idPersona"], $row["idTipo"]);
+                    $vehiculo = new VehiculoVo($row["matricula"], $row["marca"], $row["aseptado"], $row["idPersona"], $row["idTipo"]);
                     
                     array_push($coches, $vehiculo);
                 }

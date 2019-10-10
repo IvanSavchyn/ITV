@@ -78,12 +78,121 @@
         include ("ScriptsPHP/controlador2.php");
         $controlador = new Controlador2();
         if($controlador->ComprobarConexion()) {
-            $coches = $controlador->getCochesCliente($_SESSION["dni"]);
-            if(is_null($coches)) {
-                
+            
+            
+            $coches = $controlador->getCochesCliente("123456789");
+            
+            
+            
+            if(!is_null($coches)) {
+                echo "<div class='div_coches'>";
+                for($i = 0; $i < sizeof($coches); $i++) {
+                    echo "
+                        <p class='veh_inf'>Información del vehículo</p>
+                            <div class='coche'>
+                                <div class='coche_1'>
+                                    <h3 class='text_coche'>Matricula</h3>
+                                    <input type='text' class='inputs_2' disabled value='" . $coches[$i]->getId() . "'><br>
+                                </div>
+                                <div class='coche_2'>
+                                    <h3 class='ext_coche'>Marca</h3>
+                                    <input type='text' class='inputs_2' disabled value='" . $coches[$i]->getMarca() . "'><br>
+                                </div>
+                                <div class='coche_3'>
+                                    <h3 class='text_coche'>Tipo</h3>";
+                                    if(strcmp($coches[$i]->getTipo(), "privado") == 0) {
+                                        echo "<select class='select_tipo_coche'>           
+                                                    <option value='privado' selected='true'>Privado</option>
+                                                    <option value='publico'>Publico</option>
+                                            </select>";
+                                    }else {
+                                        echo "<select class='select_tipo_coche'>
+                                                    <option value='privado'>Privado</option>
+                                                    <option value='publico' selected='true'>Publico</option>
+                                            </select>";
+                                    }
+                                    
+                                echo "
+                                
+                                </div>
+                                <button class='bot_modificar_coche'>Modificar</button>
+                                <button class='bot_eliminar_coche'>Eliminar coche</button>
+                                
+                            ";
+                        $pago = $controlador->getPago($coches[$i]->getId());
+                    if(!is_null($pago)) {
+                        echo "
+                            <p class='pago_inf'>Información del pago</p>
+                                <div class='div_pago'>
+                            <div class='pago_1'>
+                                <h3 class='text_coche'>Numero de pago</h3>
+                                <input type='text' class='inputs_2' disabled value='" . $pago->getId() . "'><br>
+                            </div>
+                            <div class='pago_2'>
+                                <h3 class='text_coche'>Costo</h3>
+                                <input type='text' class='inputs_2' disabled value='" . $pago->getCosto() . "'><br>
+                            </div>
+                            <div class='pago_3'>
+                                <h3 class='text_coche'>Fecha</h3>
+                                <input type='text' class='inputs_2' disabled value='" . $pago->getFecha() . "'><br>
+                            </div>
+                            <div class='pago_4'>
+                                <h3 class='text_coche'>Hora</h3>
+                                <input type='text' class='inputs_2' disabled value='" . $pago->getHora() . "'><br>
+                            </div>
+                            
+                            </div>
+                        ";
+                        //Cerrar div 'pago'
+                        $bahia = $controlador->getBahia($pago->getIdBahia());
+                        if(!is_null($bahia)) {
+                            $parck = $controlador->getParqueadero($bahia->getIdParqueadero());
+                            echo "
+                                <p class='inf_parqueadero'>Informacion del parqueadero</p>
+                                <div class='div_parqueadero'>
+
+                                    <div class='parqueadero'>
+                                        <h3 class='text_coche'>Parqueadero</h3>
+                                        <input type='text' class='inputs_2' disabled value='" . $parck->getId() . " : " . $parck->getNombre() . " : " . $parck->getUbicacion() ."'><br>
+                                    </div>
+                                    <div class='bahia'>
+                                        <h3 class='text_coche'>Bahia</h3>
+                                        <input type='text' class='inputs_2' disabled value='" . $bahia->getIdBahia() . " : " . $bahia->getDisponible() ."'><br>
+                                    </div> 
+                                </div>
+                            ";
+                        }
+                        else {
+                            echo "
+                                <p class='inf_parqueadero'>Informacion del parqueadero</p>
+                                <div class='div_parqueadero'>
+                                    <p class='park_no_asignado'>Parqueadero no asignado!</p> 
+                                </div>
+                            ";
+                        }
+                        
+                        
+                    }
+                    else {
+                        echo "<p class='pago_inf'>Información del pago</p>
+                                <div class='div_pago'>
+                            <p class='p_no_realizado'>Pago no realizado!</p>
+                            <button class='bot_pagar'>Pagar</button>
+                            </div>
+                        ";
+                    }            
+                    //Cerrar div 'coche'
+                    echo "</div>";
+                        
+                } 
+                //Cerrar div 'div_coches'
+                echo "</div>";
             }
             else {
-                
+                echo "<div class='div_coches' style='height: 30%;'>
+                            <p class='p_no_realizado'>Cliente no tiene coches registrados!</p>
+                    </div>
+                ";
             }
         }
         else {
@@ -91,72 +200,6 @@
         }
         $controlador->Desconectar();
     ?>
-    <div class='div_coches'>
-        <p class='veh_inf'>Información del vehículo</p>
-        <div class='coche'>
-            <div class='coche_1'>
-                <h3 class='text_coche'>Matricula</h3>
-                <input type='text' class='inputs_2' disabled value='1872 HWN'><br>
-            </div>
-            <div class='coche_2'>
-                <h3 class='ext_coche'>Marca</h3>
-                <input type='text' class='inputs_2' disabled value='SEAT'><br>
-            </div>
-            <div class='coche_3'>
-                <h3 class='text_coche'>Tipo</h3>
-                <select class='select_tipo_coche'>
-                    <option value='privado'>Privado</option>
-                    <option value='publico'>Publico</option>
-                </select>
-            </div>
-            <button class='bot_modificar_coche'>Modificar</button>
-            <button class='bot_eliminar_coche'>Eliminar coche</button>
-            
-            <p class='pago_inf'>Información del pago</p>
-            <div class='div_pago'>
-                <div class='pago_1'>
-                    <h3 class='text_coche'>Numero de pago</h3>
-                    <input type='text' class='inputs_2' disabled value='x75834'><br>
-                </div>
-                <div class='pago_2'>
-                    <h3 class='text_coche'>Costo</h3>
-                    <input type='text' class='inputs_2' disabled value='25€'><br>
-                </div>
-                <div class='pago_3'>
-                    <h3 class='text_coche'>Fecha</h3>
-                    <input type='text' class='inputs_2' disabled value='1.10.2019'><br>
-                </div>
-                <div class='pago_4'>
-                    <h3 class='text_coche'>Hora</h3>
-                    <input type='text' class='inputs_2' disabled value='20:17'><br>
-                </div>
-                <!--
-                <p class='p_no_realizado'>Pago no realizado!</p>
-                <button class='bot_pagar'>Pagar</button>
-                -->
-            </div>
-            <p class='inf_parqueadero'>Informacion del parqueadero</p>
-            <div class='div_parqueadero'>
-                
-                <div class='parqueadero'>
-                    <h3 class='text_coche'>Parqueadero</h3>
-                    <input type='text' class='inputs_2' disabled value='CAlle 12 '><br>
-                </div>
-                <div class='bahia'>
-                    <h3 class='text_coche'>Bahia</h3>
-                    <input type='text' class='inputs_2' disabled value='3'><br>
-                </div>
-                
-                <!--
-                <p class='park_no_asignado'>Parqueadero no asignado!</p>
-                -->
-            </div>
-            
-                 
-                
-            </div>
-            
-        </div>
     
 
     <!-- un coment -->
