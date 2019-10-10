@@ -2,12 +2,14 @@
     class VehiculoVo {
         private $id;
         private $marca;
+        private $aceptado;
         private $idPersona;
         private $idTipo;
         
-        public function __construct($id, $marca, $idPersona, $idTipo) {
+        public function __construct($id, $marca, $aceptado, $idPersona, $idTipo) {
             $this->id = $id;
-            $this->marca = $nombre;
+            $this->marca = $marca;
+            $this->aceptado = $aceptado;
             $this->idPersona = $idPersona;
             $this->idTipo = $idTipo;
         }
@@ -17,10 +19,13 @@
         public function setMarca($narca) {
              $this->marca = $nombre;
         }
+        public function setAceptado($aceptado) {
+            $this->aceptado = $aceptado;
+        }
         public function setIdPersona($IdPersona) {
             $this->idPersona = $idPersona;
         }
-        public function setIdTipo($idTipo) {
+        public function setTipo($idTipo) {
             $this->idTipo = $idTipo;
         }
         public function getId() {
@@ -29,10 +34,13 @@
         public function getMarca() {
             return $this->marca;
         }
+        public function getAceptado() {
+            return $this->aceptado;
+        }
         public function getIdPersona() {
             return $this->idPersona;
         }
-        public function getidTipo() {
+        public function getTipo() {
             return $this->idTipo;
         }
     }

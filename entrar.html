@@ -1,11 +1,11 @@
 <html>
     <head>
         <link rel="stylesheet" href="Style/style-index.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js">
-        </script>
-        <script src="Scripts/index.js"></script>
         <link href='https://fonts.googleapis.com/css?family=Playfair Display SC' rel='stylesheet'>
         <link href="Style/login.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script src="Scripts/index.js"></script>
+        <script src="Scripts/script-entrar.js"></script>
         <meta charset="UTF-8">
     </head>
 <body ng-app="myITV">
@@ -33,11 +33,11 @@
     <div id="div_login">
         <h2>Iniciar sesión</h2><br><br>
         <h3>DNI</h3>
-        <input type="text" class="inputs"><br>
+        <input type="text" class="inputs" id="dni"><br>
         <h3>Contraseña</h3>
-        <input type="password" class="inputs"><br>
+        <input type="password" class="inputs" id="contr"><br>
         <button id="bot_registrar" ng-controller="go_to" ng-click="open_registr()">Registrarte</button>
-        <button id="bot_entrar">Entrar</button>
+        <button id="bot_entrar" ng-controller="entrar" ng-click="entrar()">Entrar</button>
     </div>
 
     <!-- un coment -->

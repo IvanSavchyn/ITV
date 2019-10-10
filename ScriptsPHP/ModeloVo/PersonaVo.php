@@ -7,18 +7,20 @@
         private $email;
         private $telefono;
         private $direccion;
+        private $aceptado;
         private $contrasenia;
         private $nuevaContrasenia;
         
-        public function __construct($dni, $nombre, $apellidos, $email, $telefono, $direccion, $contrasenia, $nuevaContrasenia) {
+        public function __construct($dni, $nombre, $apellidos, $email, $telefono, $direccion, $aceptado, $contrasenia) {
             $this->dni = $dni;
             $this->nombre = $nombre;
             $this->apellidos = $apellidos;
             $this->email = $email;
             $this->telefono = $telefono;
             $this->direccion = $direccion;
+            $this->aceptado = $aceptado;
             $this->contrasenia = $contrasenia;
-            $this->nuevaContrasenia = $nuevaContrasenia;
+            $this->nuevaContrasenia = "";
         }
         
         public function setDni($dni) {
@@ -38,6 +40,9 @@
         }
         public function setDireccion($direccion) {
             $this->direccion = $direccion;
+        }
+        public function setAceptado($aceptado) {
+            $this->aceptado = $aceptado;
         }
         public function setContrasenia($contrasenia) {
             $this->contrasenia = $contrasenia;
@@ -64,6 +69,9 @@
         }
         public function getDireccion() {
             return $this->direccion;
+        }
+        public function getAceptado() {
+            return $this->aceptado;
         }
         public function getContrasenia() {
             return $this->contrasenia;

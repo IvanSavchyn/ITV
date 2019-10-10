@@ -51,13 +51,13 @@
                     enviar += datos[i].nombre + "=" + datos[i].valor + "&";
                 }
                 
-                enviarDatos("ScriptsPHP/index.php", enviar + "function=registrar");
+                enviarDatos(enviar + "function=registrar");
             }
             
 
         };
     });
-function enviarDatos(archivo, enviar) {
+function enviarDatos(enviar) {
     
     if (window.XMLHttpRequest) {
         xmlhttp = new XMLHttpRequest();
@@ -68,13 +68,9 @@ function enviarDatos(archivo, enviar) {
         if (this.readyState == 4 && this.status == 200) {
            console.log(this.responseText);
     }
-        
-       
-        
-  
+ 
     }
-
-    xmlhttp.open("POST",archivo,true);
+    xmlhttp.open("POST","ScriptsPHP/controlador.php",true);
     xmlhttp.setRequestHeader('Content-Type',"application/x-www-form-urlencoded");
     xmlhttp.send(enviar);
 }

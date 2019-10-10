@@ -5,7 +5,7 @@
         </script>
         <script src="Scripts/index.js"></script>
         <link href='https://fonts.googleapis.com/css?family=Playfair Display SC' rel='stylesheet'>
-        <link href="Style/style-validar-clientes.css" rel="stylesheet">
+        <link href="Style/style-validar-coches.css" rel="stylesheet">
         <meta charset="UTF-8">
     </head>
 <body ng-app="myITV">
@@ -35,70 +35,50 @@
     </div>
 
     
-    <h2>Clientes</h2>
-    <div id="div_datos">
-        <div id="div_datos_1" class="datos">
-            <h3>DNI</h3>
-            <input disabled type="text" class="inputs"><br>
-            <h3>Email</h3>
-            <input type="text" class="inputs"><br>
-        </div>
-        <div id="div_datos_2" class="datos">
-            <h3>Nombre</h3>
-            <input type="text" class="inputs"><br>
-            <h3>Telefono</h3>
-            <input type="text" class="inputs"><br>
-        </div>
-        <div id="div_datos_3" class="datos">
-            <h3>Apellidos</h3>
-            <input type="text" class="inputs"><br>
-        </div>
-        <button id="bot_eliminar_cliente">Eliminar</button>
-        <button id="bot_aceptar">Aceptar</button>
-    </div>
-    <div id="div_datos">
-        <div id="div_datos_1" class="datos">
-            <h3>DNI</h3>
-            <input disabled type="text" class="inputs"><br>
-            <h3>Email</h3>
-            <input type="text" class="inputs"><br>
-        </div>
-        <div id="div_datos_2" class="datos">
-            <h3>Nombre</h3>
-            <input type="text" class="inputs"><br>
-            <h3>Telefono</h3>
-            <input type="text" class="inputs"><br>
-        </div>
-        <div id="div_datos_3" class="datos">
-            <h3>Apellidos</h3>
-            <input type="text" class="inputs"><br>
-        </div>
-        <button id="bot_eliminar_cliente">Eliminar</button>
-        <button id="bot_aceptar">Aceptar</button>
-    </div>
-    <div id="div_datos">
-        <div id="div_datos_1" class="datos">
-            <h3>DNI</h3>
-            <input disabled type="text" class="inputs"><br>
-            <h3>Email</h3>
-            <input type="text" class="inputs"><br>
-        </div>
-        <div id="div_datos_2" class="datos">
-            <h3>Nombre</h3>
-            <input type="text" class="inputs"><br>
-            <h3>Telefono</h3>
-            <input type="text" class="inputs"><br>
-        </div>
-        <div id="div_datos_3" class="datos">
-            <h3>Apellidos</h3>
-            <input type="text" class="inputs"><br>
-        </div>
-        <button id="bot_eliminar_cliente">Eliminar</button>
-        <button id="bot_aceptar">Aceptar</button>
-    </div>
+    <h2>Coches</h2>
     
-    
+    <?php 
+        include ("ScriptsPHP/controlador2.php");
+        $controlador2 = new Controlador2();
+        if($controlador2->ComprobarConexion()) {
+            $coches = $controlador2->getCochesNoAceptados();
+            if($coches != null) {
+                for($i = 0; $i < sizeof($coches) ; $i = $i + 2) {
+                    echo "
+                                <div id='div_datos'>
+                                    <div id='div_datos_1' class='datos'>
+                                        <h3>Matricula</h3>
+                                        <input disabled type='text' class='inputs' value='" . $coches[$i+1]->getId() . "'><br>
+                                        <h3>Marca</h3>
+                                        <input disabled type='text' class='inputs' value='" . $coches[$i+1]->getMarca() . "'><br>
+                                        <h3>Tipo de vehiculo</h3>
+                                        <input disabled type='text' class='inputs' value='" . $coches[$i+1]->getTipo() . "'><br>
+                                    </div>
+                                    <div id='div_datos_2' class='datos'>
+                                        <h3>DNI del dueño</h3>
+                                        <input disabled type='text' class='inputs' value='" . $coches[$i]->getDni() . "'><br>
+                                        <h3>Nombre</h3>
+                                        <input disabled type='text' class='inputs' value='" . $coches[$i]->getNombre() . "'><br>
+                                        <h3>Apellidos</h3>
+                                        <input disabled type='text' class='inputs' value='" . $coches[$i]->getApellidos() . "'><br>
+                                    </div>
+                                    <button id='bot_eliminar_coche'>Eliminar</button>
+                                    <button id='bot_aceptar'>Aceptar</button>
+                                </div>
+                        ";
+                }
+            }
+            else {
+                echo "error";
+            }
+        }
+        else {
+            echo "error en conectar a base de datos";
+        }
+        $controlador2->Desconectar();
+    ?>
 
-    <!-- un coment -->
+
+
 </body>
 </html>

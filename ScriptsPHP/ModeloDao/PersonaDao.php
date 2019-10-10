@@ -1,32 +1,14 @@
 <?php 
-    require_once('ConfigBD.php');
+
     class PersonaDao {
         private $bd;
-       
-        public function getBD() {
-            return $this->bd;
-        }
-        public function setBD($bd) {
+        
+        public function __construct($bd) {
             $this->bd = $bd;
         }
-        
-        public function conectar() {
-            $config = new ConfigBD();
-            $this->bd = mysqli_connect($config->getHOST(), $config->getUSER(),$config->getPASSWORD(),$config->getDATABASE());
-            if(!$this->bd) {
-                return mysqli_connect_error() . "";
-            }
-            else {
-                return 1 . "";
-            }
-            
-        }
     
-        public function desconectar() {
-            mysqli_close($this->bd);
-        }
         public function registrarCliente($cliente) {
-            $consulta = "INSERT INTO personas VALUES('" . $cliente->getDni() ."' , '" . $cliente->getNombre() . "' , '" . $cliente->getApellidos() . "', '" . $cliente->getEmail() . "' , '" . $cliente->getTelefono() . "' , '" . $cliente->getDireccion() . "' , '" . $cliente->getContrasenia() . "');";
+            $consulta = "INSERT INTO personas VALUES('" . $cliente->getDni() ."' , '" . $cliente->getNombre() . "' , '" . $cliente->getApellidos() . "', '" . $cliente->getEmail() . "' , '" . $cliente->getTelefono() . "' , '" . $cliente->getDireccion() . "' ,'false', '" . $cliente->getContrasenia() . "');";
             
             if(mysqli_query($this->bd, $consulta)) {
                 return "insertado";
@@ -45,6 +27,36 @@
             }
             else {
                 return true;
+            }
+        }
+        public function getClientes($aceptado) {
+            include 'ScriptsPHP/ModeloVo/PersonaVo.php';
+            $consulta = "SELECT * FROM personas WHERE aceptado = '" . $aceptado ."';";
+            $result = mysqli_query($this->bd, $consulta);
+            if(mysqli_num_rows($result) == 0) {
+                return null;
+            }
+            else {
+                $clientes = array();
+                while($row = mysqli_fetch_assoc($result)) {
+                    $persona = new PersonaVo($row["dni"], $row["nombre"], $row["apellidos"], $row["email"], $row["telefono"], $row["direccion"], $row["aceptado"], "");
+                    
+                    array_push($clientes, $persona);
+                }
+                return $clientes;
+            }
+        }
+        public function entrar($cliente) {
+            
+            $consulta = "SELECT * FROM personas WHERE dni = '" . $cliente->getDni() ."';";
+            $result = mysqli_query($this->bd, $consulta);
+            if(mysqli_num_rows($result) == 0) {
+                return null;
+            }
+            else {
+                $row = mysqli_fetch_assoc($result);
+                $persona = new PersonaVo($row["dni"], $row["nombre"], $row["apellidos"], $row["email"], $row["telefono"], $row["direccion"], $row["aceptado"], $row["contrasenia"]);
+                return $persona;
             }
         }
     }

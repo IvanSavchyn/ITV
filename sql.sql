@@ -23,6 +23,7 @@ CREATE TABLE personas (
     email VARCHAR(30) NOT NULL,
     telefono VARCHAR(12) NOT NULL,
     direccion VARCHAR(40) NOT NULL,
+    aceptado ENUM("true", "false", "admin") NOT NULL,
     contrasenia VARCHAR(40) NOT NULL,
     PRIMARY KEY(dni)
 );
@@ -30,6 +31,7 @@ CREATE TABLE personas (
 CREATE TABLE vehiculos(
     matricula VARCHAR(10),
     marca VARCHAR(20) NOT NULL,
+    aseptado ENUM("true", "false") NOT NULL,
     idPersona VARCHAR(9),
     idTipo VARCHAR(3),
     PRIMARY KEY(matricula),
@@ -63,3 +65,5 @@ CREATE TABLE pagos(
     FOREIGN KEY (idBahia) REFERENCES bahias(idBahia) ON UPDATE CASCADE ON DELETE SET NULL,
     FOREIGN KEY (idVehiculo) REFERENCES vehiculos(matricula) ON UPDATE CASCADE ON DELETE SET NULL  
 );
+insert into tipovehiculos values ("privado", "1");
+insert into tipovehiculos values ("publico", "2");

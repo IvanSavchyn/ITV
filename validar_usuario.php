@@ -5,7 +5,7 @@
         </script>
         <script src="Scripts/index.js"></script>
         <link href='https://fonts.googleapis.com/css?family=Playfair Display SC' rel='stylesheet'>
-        <link href="Style/style-validar-coches.css" rel="stylesheet">
+        <link href="Style/style-validar-clientes.css" rel="stylesheet">
         <meta charset="UTF-8">
     </head>
 <body ng-app="myITV">
@@ -33,34 +33,48 @@
         <h1 id="name">ITV</h1>
 
     </div>
+    <h2>Clientes</h2>
+    <?php 
+        include ("ScriptsPHP/controlador2.php");
+        $controlador2 = new Controlador2();
+        if($controlador2->ComprobarConexion()) {
+            $clientes = $controlador2->getClientes("false");
+            if($clientes != null) {
+                for($i = 0; $i < sizeof($clientes); $i++) {
+                    echo "
+                        <div id='div_datos'>
+                            <div id='div_datos_1' class='datos'>
+                                <h3>DNI</h3>
+                                <input disabled type='text' class='inputs' value='" . $clientes[$i]->getDni() . "'><br>
+                                <h3>Email</h3>
+                                <input disabled type='text' class='inputs' value='" . $clientes[$i]->getEmail() . "'><br>
+                            </div>
+                            <div id='div_datos_2' class='datos'>
+                                <h3>Nombre</h3>
+                                <input disabled type='text' class='inputs' value='" . $clientes[$i]->getNombre() . "'><br>
+                                <h3>Telefono</h3>
+                                <input disabled type='text' class='inputs' value='" . $clientes[$i]->getTelefono() . "'><br>
+                            </div>
+                            <div id='div_datos_3' class='datos'>
+                                <h3>Apellidos</h3>
+                                <input disabled type='text' class='inputs' value='" . $clientes[$i]->getApellidos() . "'><br>
+                            </div>
+                            <button id='bot_eliminar_cliente'>Eliminar</button>
+                            <button id='bot_aceptar'>Aceptar</button>
+                        </div>
+                    ";
+                }
+            }
+            else {
+                echo "<script>console.log('error');</script>";
+            }
+        }
+        else {
+            echo "<script>console.log('error en conectar a base de datos');</script>";
+        }
+        $controlador2->Desconectar();
+    ?>
+    
 
-    
-    <h2>Coches</h2>
-    <div id="div_datos">
-        <div id="div_datos_1" class="datos">
-            <h3>Matricula</h3>
-            <input disabled type="text" class="inputs"><br>
-            <h3>Marca</h3>
-            <input disabled type="text" class="inputs"><br>
-            <h3>Tipo de vehiculo</h3>
-            <input disabled type="text" class="inputs"><br>
-        </div>
-        <div id="div_datos_2" class="datos">
-            <h3>DNI del dueño</h3>
-            <input disabled type="text" class="inputs"><br>
-            <h3>Nombre</h3>
-            <input disabled type="text" class="inputs"><br>
-            <h3>Apellidos</h3>
-            <input disabled type="text" class="inputs"><br>
-        </div>
-        <button id="bot_eliminar_coche">Eliminar</button>
-        <button id="bot_aceptar">Aceptar</button>
-    </div>
-
-    
-    
-    
-
-    <!-- un coment -->
 </body>
 </html>
