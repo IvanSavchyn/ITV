@@ -19,7 +19,7 @@
         public function setDisponible($disponible) {
             $this->disponible = $disponible;
         }
-        public function getIdIdBahia() {
+        public function getIdBahia() {
             return  $this->idBahia;
         }
         public function getIdParqueadero() {

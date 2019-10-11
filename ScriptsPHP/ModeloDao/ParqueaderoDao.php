@@ -1,13 +1,13 @@
 <?php 
-    class ParquederoDao {
+    class ParqueaderoDao {
         private $bd;
         public function __construct($bd) {
             $this->bd = $bd;
         }
-        public function getParqueadero($idParqueadero) {
-            include 'ScriptsPHP/ModeloVo/Parqueadero.php';
-            $consulta = "SELECT * FROM parqueaderos  WHERE idParqueadero = '" . $idParqueadero  ."';";
-            $result = mysqli_query($this->bd, $bd);
+        public function getParqueadero($id) {
+            include 'ScriptsPHP/ModeloVo/ParqueaderoVo.php';
+            $consulta = "SELECT * FROM parqueaderos  WHERE idParqueadero = '" . $id  ."';";
+            $result = mysqli_query($this->bd, $consulta);
             if(mysqli_num_rows($result) == 0) {
                 return null;
             }

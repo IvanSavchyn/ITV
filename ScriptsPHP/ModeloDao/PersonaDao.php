@@ -46,6 +46,20 @@
                 return $clientes;
             }
         }
+        public function getClientePorDni($dni) {
+            include 'ScriptsPHP/ModeloVo/PersonaVo.php';
+            $consulta = "SELECT * FROM personas WHERE dni = '" . $dni ."';";
+            $result = mysqli_query($this->bd, $consulta);
+            if(mysqli_num_rows($result) == 0) {
+                return null;
+            }
+            else {
+                $row = mysqli_fetch_assoc($result);
+                $persona = new PersonaVo($row["dni"] , $row["nombre"],  $row["apellidos"] , $row["email"] , $row["telefono"], $row["direccion"], $row["aceptado"], $row["contrasenia"]);
+                    
+                return $persona;
+            }
+        }
         public function entrar($cliente) {
             
             $consulta = "SELECT * FROM personas WHERE dni = '" . $cliente->getDni() ."';";

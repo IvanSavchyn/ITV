@@ -8,8 +8,9 @@
         
         public function getPago($matricula) {
             include "ScriptsPHP/ModeloVo/PagoVo.php";
-            $consulta = "Select * FROM pagos WHERE idVehiculo = '" . $matricula . "';";
+            $consulta = "SELECT * FROM pagos WHERE idVehiculo = '" . $matricula . "';";
             $result = mysqli_query($this->bd, $consulta);
+            
             if(mysqli_num_rows($result) == 0) {
                 return null;
             }

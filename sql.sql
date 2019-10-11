@@ -67,3 +67,8 @@ CREATE TABLE pagos(
 );
 insert into tipovehiculos values ("privado", "1");
 insert into tipovehiculos values ("publico", "2");
+insert into personas values ("123456789", "123456789", "123456789","123456789","123456789","123456789", "false", "123456789");
+insert into vehiculos values("1872HWN", "SEAT", "false", "123456789", "privado");
+insert into parqueaderos values ("1", "nomb1", "Getafe");
+insert into bahias values ("1", "1", "true");
+insert into pagos values ("1", "1", "1872HWN", "22:10", "2019-10-11", "25.03");

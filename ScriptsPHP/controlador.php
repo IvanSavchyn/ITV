@@ -92,7 +92,7 @@
         $_SESSION["apellidos"] = $persona->getApellidos();
         $_SESSION["email"] = $persona->getEmail();
         $_SESSION["telefono"] = $persona->getTelefono();
-        $_SESSION["Direccion"] = $persona->getDireccion();
+        $_SESSION["direccion"] = $persona->getDireccion();
         $_SESSION["aceptado"] = $persona->getAceptado();
         $_SESSION["contr"] = $persona->getContrasenia();
     }

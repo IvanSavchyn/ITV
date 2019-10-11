@@ -51,7 +51,7 @@
                     <h3>Apellidos</h3>
                     <input type='text' class='inputs' value='" . $_SESSION["apellidos"] . "'><br>
                 </div>
-                <div id='div_datos_2' class='atos'>
+                <div id='div_datos_2' class='datos'>
                     <h3>Email</h3>
                     <input type='text' class='inputs' value='" . $_SESSION["email"] . "'><br>
                     <h3>Telefono</h3>
@@ -153,11 +153,11 @@
 
                                     <div class='parqueadero'>
                                         <h3 class='text_coche'>Parqueadero</h3>
-                                        <input type='text' class='inputs_2' disabled value='" . $parck->getId() . " : " . $parck->getNombre() . " : " . $parck->getUbicacion() ."'><br>
+                                        <input type='text' class='inputs_2' disabled value='ID: " . $parck->getId() . " Nombre: " . $parck->getNombre() . " Ubicacion: " . $parck->getUbicacion() ."'><br>
                                     </div>
                                     <div class='bahia'>
                                         <h3 class='text_coche'>Bahia</h3>
-                                        <input type='text' class='inputs_2' disabled value='" . $bahia->getIdBahia() . " : " . $bahia->getDisponible() ."'><br>
+                                        <input type='text' class='inputs_2' disabled value='ID: " . $bahia->getIdBahia() . " :Disponible:  " . $bahia->getDisponible() ."'><br>
                                     </div> 
                                 </div>
                             ";

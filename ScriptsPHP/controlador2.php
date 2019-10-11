@@ -30,20 +30,28 @@
             $vehiculoDao = new VehiculoDao($this->bd->getBD());
             return $vehiculoDao->getCochesNoAceptados();
         }
+        public function getClientePorDni($dni) {
+            $personaDao = new PersonaDao($this->bd->getBD());
+            return $personaDao->getClientePorDni($dni);
+        }
         public function getCochesCliente($dni) {
             $vehiculoDao = new VehiculoDao($this->bd->getBD());
             return $vehiculoDao->getCochesCliente($dni);
         }
         public function getPago($matricula) {
-            $pagoDao = new PagoDao($this->bd);
+            $pagoDao = new PagoDao($this->bd->getBD());
             return $pagoDao->getPago($matricula);
         }
         public function getBahia($id) {
-            $bahia = new BahiaDAo($this->bd);
+            $bahia = new BahiaDao($this->bd->getBD());
             return $bahia->getBahia($id);
         }
+        public function getBahias() {
+            $bahia = new BahiaDao($this->bd->getBD());
+            return $bahia->getBahias();
+        }
         public function getParqueadero($id) {
-            $parck = new ParqueaderoDAo($this->bd);
+            $parck = new ParqueaderoDao($this->bd->getBD());
             return $parck->getParqueadero($id);
         }
     }
