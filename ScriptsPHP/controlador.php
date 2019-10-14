@@ -18,7 +18,22 @@
             echo entrar($bd->getBD());
         }
         if(strcmp($func, "buscarCliente") == 0) {
-          buscarClientes();
+            buscarClientes();
+        }
+        if(strcmp($func, "selectCliente") == 0) {
+            selectCliente();
+        }
+        if(strcmp($func, "eliminarCliente") == 0) {
+            echo eliminarCliente($bd->getBD());
+        }
+        if(strcmp($func, "aceptarCliente") == 0) {
+            echo aceptarCliente($bd->getBD());
+        }
+        if(strcmp($func, "eliminarCoche") == 0) {
+            echo eliminarCoche($bd->getBD());
+        }
+        if(strcmp($func, "aceptarCoche") == 0) {
+            echo aceptarCoche($bd->getBD());
         }
     }
     else {
@@ -49,7 +64,8 @@
 
     function registrarCoche($bd) {
         $resultado = "";
-        $vehiculoVo = new VehiculoVo($_POST["matricula"],$_POST["marca"], "false","123456789",$_POST["tipo"]);
+
+        $vehiculoVo = new VehiculoVo($_POST["matricula"],$_POST["marca"], "false", $_POST["dni_cliente"], $_POST["tipo"]);
 
         $vehiculoDao = new VehiculoDao($bd);
 
@@ -80,9 +96,11 @@
             iniciarSession($persona);
             if(strcmp($persona->getAceptado(), "admin") == 0) {
                 $result = "admin";
+                header("Location: ../clientes.php");
             }
             else {
                 $result = "user";
+                header("Location: ../home.php");
             }
 
         }
@@ -92,6 +110,7 @@
         session_start();
         $_SESSION["user"] = serialize($persona);
         $_SESSION["user_buscar"] = serialize(null);
+        $_SESSION["cliente_seleccionado"] = "";
     }
     function buscarClientes() {
       session_start();
@@ -99,5 +118,27 @@
       $_SESSION["user_buscar"] = serialize($persona_buscar);
       header("Location: ../clientes.php");
     }
+    function selectCliente() {
+        session_start();
+        $_SESSION["cliente_seleccionado"] = $_POST["dni"];
+        header("Location: ../cliente_seleccionado.php");
+    }
+    function eliminarCliente($bd) {
+        $persona = new PersonaDao($bd);
+        return $persona->eliminarCliente($_POST["dni"]);
+    }
+    function aceptarCliente($bd) {
+        $persona = new PersonaDao($bd);
+        return $persona->aceptarCliente($_POST["dni"]);
+    }
+    function eliminarCoche($bd) {
+        $vehiculo = new VehiculoDao($bd);
+        return $vehiculo->eliminarCoche($_POST["matricula"]);
+    }
+    function aceptarCoche($bd){
+        $vehiculo = new VehiculoDao($bd);
+        return $vehiculo->aceptarCoche($_POST["matricula"]);
+    }
+
 
 ?>

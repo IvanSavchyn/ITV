@@ -4,6 +4,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js">
         </script>
         <script src="Scripts/index.js"></script>
+        <script src="Scripts/script-acept-coches.js"></script>
         <link href='https://fonts.googleapis.com/css?family=Playfair Display SC' rel='stylesheet'>
         <link href="Style/style-validar-coches.css" rel="stylesheet">
         <meta charset="UTF-8">
@@ -62,14 +63,16 @@
                                         <h3>Apellidos</h3>
                                         <input disabled type='text' class='inputs' value='" . $coches[$i]->getApellidos() . "'><br>
                                     </div>
-                                    <button id='bot_eliminar_coche'>Eliminar</button>
-                                    <button id='bot_aceptar'>Aceptar</button>
+                                    <button id='bot_eliminar_coche' onclick='eliminarCoche(\"" . $coches[$i+1]->getId() . "\")'>Eliminar</button>
+                                    <button id='bot_aceptar' onclick='aceptarCoche(\"" . $coches[$i+1]->getId() . "\")'>Aceptar</button>
                                 </div>
                         ";
                 }
             }
             else {
-                echo "error";
+                echo "<div id='div_datos' style='text-align: center; height: 20%;'>
+                <h2 style='margin-left: 35%;'> No hay coches!</h2>
+                </div>";
             }
         }
         else {

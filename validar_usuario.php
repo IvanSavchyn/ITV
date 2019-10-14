@@ -4,6 +4,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js">
         </script>
         <script src="Scripts/index.js"></script>
+        <script src="Scripts/script-acept-clientes.js"></script>
         <link href='https://fonts.googleapis.com/css?family=Playfair Display SC' rel='stylesheet'>
         <link href="Style/style-validar-clientes.css" rel="stylesheet">
         <meta charset="UTF-8">
@@ -39,6 +40,7 @@
         $controlador2 = new Controlador2();
         if($controlador2->ComprobarConexion()) {
             $clientes = $controlador2->getClientes("false");
+            
             if($clientes != null) {
                 for($i = 0; $i < sizeof($clientes); $i++) {
                     echo "
@@ -59,14 +61,16 @@
                                 <h3>Apellidos</h3>
                                 <input disabled type='text' class='inputs' value='" . $clientes[$i]->getApellidos() . "'><br>
                             </div>
-                            <button id='bot_eliminar_cliente'>Eliminar</button>
-                            <button id='bot_aceptar'>Aceptar</button>
+                            <button id='bot_eliminar_cliente' onclick='eliminarCliente(\"" . $clientes[$i]->getDni() . "\")'>Eliminar</button>
+                            <button id='bot_aceptar' onclick='aceptarCliente(\"" . $clientes[$i]->getDni() . "\")'>Aceptar</button>
                         </div>
                     ";
                 }
             }
             else {
-                echo "<script>console.log('error');</script>";
+                echo "<div id='div_datos' style='text-align: center; height: 20%;'>
+                <h2 style='margin-left: 35%;'> No hay Clientes!</h2>
+                </div>";
             }
         }
         else {

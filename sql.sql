@@ -4,7 +4,7 @@ CREATE DATABASE itv;
 USE itv;
 
 CREATE TABLE tipoVehiculos(
-    idTipo VARCHAR(3) NOT NULL,
+    idTipo VARCHAR(7) NOT NULL,
     clase VARCHAR(10) NOT NULL UNIQUE,
     PRIMARY KEY (idTipo)
 );
@@ -32,9 +32,9 @@ CREATE TABLE personas (
 CREATE TABLE vehiculos(
     matricula VARCHAR(10),
     marca VARCHAR(20) NOT NULL,
-    aseptado ENUM("true", "false") NOT NULL,
+    aceptado ENUM("true", "false") NOT NULL,
     idPersona VARCHAR(9),
-    idTipo VARCHAR(3),
+    idTipo VARCHAR(7),
     PRIMARY KEY(matricula),
     FOREIGN KEY(idPersona) REFERENCES personas(dni) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY(idTipo) REFERENCES tipoVehiculos(idTipo) ON DELETE SET NULL ON UPDATE CASCADE
@@ -71,6 +71,7 @@ insert into tipovehiculos values ("publico", "2");
 insert into personas values ("123456789", "123456789", "123456789","123456789","123456789","123456789", "false", "123456789");
 insert into personas values ("111111111", "111111111", "111111111", "111111111", "111111111", "111111111", "true", "111111111");
 insert into personas values ("222222222", "222222222", "222222222", "222222222", "222222222", "222222222", "true", "222222222");  
+insert into personas values ("333333333", "333333333", "333333333", "333333333", "333333333", "333333333", "false", "333333333");
 insert into vehiculos values ("1234QQQ", "Volvo", "true", "111111111", "publico");
 insert into vehiculos values("1872HWN", "SEAT", "false", "123456789", "privado");
 insert into parqueaderos values ("1", "nomb1", "Getafe");

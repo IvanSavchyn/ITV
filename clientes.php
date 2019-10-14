@@ -121,7 +121,11 @@
                               <h3 class='text_coche'>Apellidos</h3>
                               <input type='text' class='inputs_2' disabled value='" . $clientes[$i]->getApellidos() . "'><br>
                           </div>
-                          <button class='bot_abrir_cliente'>Abrir</button>
+                          <form action='ScriptsPHP/controlador.php' method='POST'>
+                            <input type='text' class='inputs' name='function' style='display: none;' value='selectCliente'>
+                            <input type='text' class='inputs' name='dni' style='display: none;' value='" . $clientes[$i]->getDni() . "'>
+                            <button class='bot_abrir_cliente'>Abrir</button>
+                          </form>
                       </div>
                     ";
                   }

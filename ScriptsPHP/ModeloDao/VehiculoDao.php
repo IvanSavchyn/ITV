@@ -35,7 +35,9 @@
             $consulta = "SELECT v.matricula, v.marca , v.idTipo, p.dni, p.nombre, p.apellidos
             FROM vehiculos v, personas p
             WHERE p.dni = v.idPersona AND v.aceptado = 'false';";
+            
             $result = mysqli_query($this->bd, $consulta);
+            
             if(mysqli_num_rows($result) == 0) {
                 return null;
             }
@@ -61,11 +63,29 @@
             else {
                 $coches = array();
                 while($row = mysqli_fetch_assoc($result)) {
-                    $vehiculo = new VehiculoVo($row["matricula"], $row["marca"], $row["aseptado"], $row["idPersona"], $row["idTipo"]);
+                    $vehiculo = new VehiculoVo($row["matricula"], $row["marca"], $row["aceptado"], $row["idPersona"], $row["idTipo"]);
                     
                     array_push($coches, $vehiculo);
                 }
                 return $coches;
+            }
+        }
+        public function eliminarCoche($matricula) {
+            $consulta = "DELETE FROM vehiculos WHERE matricula='" . $matricula . "';";
+            if(mysqli_query($this->bd, $consulta)) {
+                return "Coche Eliminado!";
+            }
+            else {
+                return "No se puede eliminar el coche!";
+            }
+        }
+        public function aceptarCoche($matricula) {
+            $consulta = "UPDATE vehiculos SET aceptado='true' WHERE matricula='" . $matricula . "';";
+            if(mysqli_query($this->bd, $consulta)) {
+                return "Coche Aceptado!";
+            }
+            else {
+                return "No se puede aceptar el coche!";
             }
         }
     }

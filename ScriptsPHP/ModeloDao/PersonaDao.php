@@ -107,5 +107,23 @@
               return $clientes;
             }
         }
+        public function eliminarCliente($dni) {
+            $consulta = "DELETE FROM personas WHERE dni = '" . $dni . "';";
+            if(mysqli_query($this->bd, $consulta)) {
+                return "Cliente Eliminado!";
+            }
+            else {
+                return "No se puede eliminar cliente!";
+            }
+        }
+        public function aceptarCliente($dni){
+            $consulta = "UPDATE personas SET aceptado='true' WHERE dni = '" . $dni . "';";
+            if(mysqli_query($this->bd, $consulta)) {
+                return "Cliente aceptado!";
+            }
+            else {
+                return "No se puede aceptar cliente!";
+            }
+        }
     }
 ?>

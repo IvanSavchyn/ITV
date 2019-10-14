@@ -3,7 +3,7 @@ app.controller("registrarCoche", function($scope) {
        var valido = true;
        var matricula = document.getElementById("matricula").value;
        var marca = document.getElementById("marca").value;
-       
+       var dni = document.getElementById("dni_cliente").value;
        var radio = document.getElementsByName("tipo_vehiculo");
        var tipo = "";
        if(radio[0].checked) {
@@ -14,6 +14,7 @@ app.controller("registrarCoche", function($scope) {
        
        matricula = matricula.trim();
        marca = marca.trim();
+       dni = dni.trim();
        
        if(marca.length == 0) {
            document.getElementById("marca").style.border = "1px solid red";
@@ -22,7 +23,15 @@ app.controller("registrarCoche", function($scope) {
        else {
            document.getElementById("marca").style.border = "1px solid #BEBEBE";
        }
-       
+
+       if(dni.length != 9) {
+            document.getElementById("dni_cliente").style.border = "1px solid red";
+            valido = false;
+       }
+       else {
+            document.getElementById("dni_cliente").style.border = "1px solid #BEBEBE";
+       }
+
        if(matricula.length == 0) {
            document.getElementById("matricula").style.border = "1px solid red";
            valido = false;
@@ -38,7 +47,7 @@ app.controller("registrarCoche", function($scope) {
        
        
        if(valido) {
-           var enviar = "matricula=" + matricula + "&marca=" + marca + "&tipo=" + tipo + "&function=registrarCoche";
+           var enviar = "matricula=" + matricula + "$dni_cliente=" + dni +"&marca=" + marca + "&tipo=" + tipo + "&function=registrarCoche";
            enviarDatos(enviar);
        }
        
@@ -55,7 +64,7 @@ function enviarDatos(enviar) {
     }
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-           console.log(this.responseText);
+           alert(this.responseText);
     }
  
     }
