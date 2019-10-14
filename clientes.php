@@ -1,9 +1,18 @@
+<?php
+    session_start();
+    include "ScriptsPHP/ModeloVo/PersonaVo.php";
+
+    if(is_null($_SESSION["user"])) {
+        //header("Location: entrar.html");
+    }
+?>
 <html>
     <head>
         <link rel="stylesheet" href="Style/style-index.css">
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js">
         </script>
         <script src="Scripts/index.js"></script>
+        <script src="Scripts/script-clientes.js"></script>
         <link href='https://fonts.googleapis.com/css?family=Playfair Display SC' rel='stylesheet'>
         <link href="Style/style-clientes.css" rel="stylesheet">
         <meta charset="UTF-8">
@@ -34,46 +43,106 @@
 
     </div>
     <div id="barra_buscar">
-        <div id="div_datos_1" class="datos">
-            <h3>DNI</h3>
-            <input type="text" class="inputs"><br>
-            <h3>Email</h3>
-            <input type="text" class="inputs"><br>
-        </div>
-        <div id="div_datos_2" class="datos">
-            <h3>Nombre</h3>
-            <input type="text" class="inputs"><br>
-            <h3>Telefono</h3>
-            <input type="text" class="inputs"><br>
-        </div>
-        <div id="div_datos_3" class="datos">
-            <h3>Apellidos</h3>
-            <input type="text" class="inputs"><br>
-        </div>
-        <button id="bot_buscar">Buscar</button>
-        <div id="limpiar_campos"></div>
+      <?php
+        $buscar = unserialize($_SESSION["user_buscar"]);
+        if(!is_null($buscar)) {
+          echo "
+            <form action='ScriptsPHP/controlador.php' method='POST'>
+                <div id='div_datos_1' class='datos'>
+                    <h3>DNI</h3>
+                    <input type='text' class='inputs' name='dni' value='" . $buscar->getDni() . "'><br>
+                    <h3>Email</h3>
+                    <input type='text' class='inputs' name='email' value='" . $buscar->getEmail() . "'><br>
+                </div>
+                <div id='div_datos_2' class='datos'>
+                    <h3>Nombre</h3>
+                    <input type='text' class='inputs' name='nombre' value='" . $buscar->getNombre() . "'><br>
+                    <h3>Telefono</h3>
+                    <input type='text' class='inputs' name='telefono' value='" . $buscar->getTelefono() . "'><br>
+                </div>
+                <div id='div_datos_3' class='datos'>
+                    <h3>Apellidos</h3>
+                    <input type='text' class='inputs' name='apellidos' value='" . $buscar->getApellidos() . "'><br>
+                    <input type='text' class='inputs' name='function' style='display: none;' value='buscarCliente'>
+                </div>
+                <button id='bot_buscar' type='submit'>Buscar</button>
+                <div id='limpiar_campos' ng-controller='clientes' ng-click='limpiar()'></div>
+            </form>
+          ";
+        }
+        else {
+          echo "
+            <form action='ScriptsPHP/controlador.php' method='POST'>
+                <div id='div_datos_1' class='datos'>
+                    <h3>DNI</h3>
+                    <input type='text' class='inputs' name='dni'><br>
+                    <h3>Email</h3>
+                    <input type='text' class='inputs' name='email'><br>
+                </div>
+                <div id='div_datos_2' class='datos'>
+                    <h3>Nombre</h3>
+                    <input type='text' class='inputs' name='nombre'><br>
+                    <h3>Telefono</h3>
+                    <input type='text' class='inputs' name='telefono'><br>
+                </div>
+                <div id='div_datos_3' class='datos'>
+                    <h3>Apellidos</h3>
+                    <input type='text' class='inputs' name='apellidos'><br>
+                    <input type='text' class='inputs' name='function' style='display: none;' value='buscarCliente'>
+                </div>
+                <button id='bot_buscar' type='submit'>Buscar</button>
+                <div id='limpiar_campos' ng-controller='clientes' ng-click='limpiar()'></div>
+            </form>
+          ";
+        }
+      ?>
     </div>
-    
-    <div class="div_clientes">
-        <div class="cliente">
-            <div class="cliente_1">
-                <h3 class="text_coche">DNI</h3>
-                <input type="text" class="inputs_2" disabled value="x1234567Y"><br>
-            </div>
-            <div class="cliente_2">
-                <h3 class="text_coche">Nombre</h3>
-                <input type="text" class="inputs_2" disabled value="Neil"><br>
-            </div>
-            <div class="cliente_3">
-                <h3 class="text_coche">Apellidos</h3>
-                <input type="text" class="inputs_2" disabled value="Armstrong"><br>
-            </div>
-            <button class="bot_abrir_cliente">Abrir</button>
-        </div>
-        <div id="noHayClientes">
-            <p id="textNoHayClientes">No hay clientes!</p>
-        </div>
-    </div>
+    <?php
+        $buscar = unserialize($_SESSION["user_buscar"]);
+        if(!is_null($buscar)) {
+          include ("ScriptsPHP/controlador2.php");
+          $controlador = new Controlador2();
+          if($controlador->ComprobarConexion()) {
+              $clientes = $controlador->buscarClientes();
+              if(!is_null($clientes)) {
+                echo "<div class='div_clientes'>";
+                  for($i = 0; $i < sizeof($clientes); $i++) {
+                    echo "
+                      <div class='cliente'>
+                          <div class='cliente_1'>
+                              <h3 class='text_coche'>DNI</h3>
+                              <input type='text' class='inputs_2' disabled value='" . $clientes[$i]->getDni() . "'><br>
+                          </div>
+                          <div class='cliente_2'>
+                              <h3 class='text_coche'>Nombre</h3>
+                              <input type='text' class='inputs_2' disabled value='" . $clientes[$i]->getNombre() . "'><br>
+                          </div>
+                          <div class='cliente_3'>
+                              <h3 class='text_coche'>Apellidos</h3>
+                              <input type='text' class='inputs_2' disabled value='" . $clientes[$i]->getApellidos() . "'><br>
+                          </div>
+                          <button class='bot_abrir_cliente'>Abrir</button>
+                      </div>
+                    ";
+                  }
+                echo "</div>";
+              }
+              else {
+                echo "
+                    <div class='div_clientes'>
+                      <div id='noHayClientes'>
+                          <p id='textNoHayClientes'>No hay clientes!</p>
+                      </div>
+                    </div>
+                ";
+              }
+          }
+          else {
+              echo "<h2>No se puede conectar a base de datos!</h2>";
+          }
+          $controlador->Desconectar();
+        }
+    ?>
 
 </body>
 </html>

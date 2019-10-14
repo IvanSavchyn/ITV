@@ -1,10 +1,10 @@
-<?php 
+<?php
     include("ModeloVo/PersonaVo.php");
     include("ModeloVo/VehiculoVo.php");
     include("ModeloDao/PersonaDao.php");
     include("ModeloDao/VehiculoDao.php");
     include("Logica/Conector.php");
-    
+
     $func = strval($_POST["function"]);
     $bd = new Conector();
     if($bd->getBD() != null) {
@@ -17,13 +17,16 @@
         if(strcmp($func, "entrar") == 0) {
             echo entrar($bd->getBD());
         }
+        if(strcmp($func, "buscarCliente") == 0) {
+          buscarClientes();
+        }
     }
     else {
         echo "Error en conectarse a base de datos" . $bd->getError();
     }
     $bd->Desconectar();
 
-    
+
     function registrarCliente($bd) {
         $resultado = "";
         $personaVo = new PersonaVo($_POST["dni"], $_POST["nombre"], $_POST["apellidos"], $_POST["email"], $_POST["telefono"], $_POST["direccion"],"false", $_POST["contr"]);
@@ -47,9 +50,9 @@
     function registrarCoche($bd) {
         $resultado = "";
         $vehiculoVo = new VehiculoVo($_POST["matricula"],$_POST["marca"], "false","123456789",$_POST["tipo"]);
-        
+
         $vehiculoDao = new VehiculoDao($bd);
-        
+
         if(!$vehiculoDao->cocheExiste($vehiculoVo)) {
             $result = $vehiculoDao->registrarVehiculo($vehiculoVo);
             if(strcmp("insertado", $result) == 0) {
@@ -68,7 +71,7 @@
         $result = "";
         $persona = new PersonaVo($_POST["dni"], "", "", "", "", "","", $_POST["contr"]);
         $personaDao = new PersonaDao($bd);
-        
+
         $persona = $personaDao->entrar($persona);
         if(is_null($persona)) {
             $result = "incorrecto";
@@ -81,20 +84,20 @@
             else {
                 $result = "user";
             }
-            
+
         }
         return $result;
     }
     function iniciarSession($persona) {
         session_start();
-        $_SESSION["dni"] = $persona->getDni();
-        $_SESSION["nombre"] = $persona->getNombre();
-        $_SESSION["apellidos"] = $persona->getApellidos();
-        $_SESSION["email"] = $persona->getEmail();
-        $_SESSION["telefono"] = $persona->getTelefono();
-        $_SESSION["direccion"] = $persona->getDireccion();
-        $_SESSION["aceptado"] = $persona->getAceptado();
-        $_SESSION["contr"] = $persona->getContrasenia();
+        $_SESSION["user"] = serialize($persona);
+        $_SESSION["user_buscar"] = serialize(null);
+    }
+    function buscarClientes() {
+      session_start();
+      $persona_buscar = new PersonaVo($_POST["dni"], $_POST["nombre"], $_POST["apellidos"], $_POST["email"], $_POST["telefono"], "", "", "");
+      $_SESSION["user_buscar"] = serialize($persona_buscar);
+      header("Location: ../clientes.php");
     }
 
 ?>

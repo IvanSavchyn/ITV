@@ -33,10 +33,10 @@
         <h1 id="name">ITV</h1>
 
     </div>
-    
+
     <h2>Cliente</h2>
-    
-    <?php 
+
+    <?php
         include ("ScriptsPHP/controlador2.php");
         $controlador = new Controlador2();
         if($controlador->ComprobarConexion()) {
@@ -83,7 +83,7 @@
                                         <div class='coche_3'>
                                             <h3 class='text_coche'>Tipo</h3>";
                                             if(strcmp($coches[$i]->getTipo(), "privado") == 0) {
-                                                echo "<select class='select_tipo_coche'>           
+                                                echo "<select class='select_tipo_coche'>
                                                             <option value='privado' selected='true'>Privado</option>
                                                             <option value='publico'>Publico</option>
                                                     </select>";
@@ -102,6 +102,7 @@
 
                                     ";
                                 $pago = $controlador->getPago($coches[$i]->getId());
+                                
                             if(!is_null($pago)) {
                                 echo "
                                     <p class='pago_inf'>Información del pago</p>
@@ -127,14 +128,16 @@
                                 ";
                                 //Cerrar div 'pago'
                                 $bahia = $controlador->getBahia($pago->getIdBahia());
-                                    $bahias = $controlador->getBahias();
-                                if(strcmp($pago->getIdBahia(), "") == 0) {     
+                                $bahias = $controlador->getBahias();
+                                if(strcmp($pago->getIdBahia(), "") == 0) {
                                         echo "
                                             <p class='inf_parqueadero'>Informacion del Bahia</p>
                                                 <div class='div_parqueadero'>
-                                                    <h3 class='inf_parqueadero2'>Parqueadero no asignado!</h3>
                                                     <div class='parqueadero'>
                                                         <h3 class='text_coche'>Parqueadero</h3>
+                                                        <select class='select_parqueadero'>
+                                                            <option value=''></option>
+                                                        </select>
                                                     </div>
                                                     <div class='bahia'>
                                                         <h3 class='text_coche'>Bahia</h3>
@@ -150,16 +153,18 @@
 
                                                 </div>
                                         ";
-                                    
+
                                 }else {
+
+                                    $parqueadero = $controlador->getParqueadero($bahia->getIdParqueadero());
+
                                     echo "
                                             <p class='inf_parqueadero'>Informacion del Bahia</p>
                                                 <div class='div_parqueadero'>
-                                                    <h3 class='inf_parqueadero2'>Parqueadero asignado!</h3>
                                                     <div class='parqueadero'>
                                                         <h3 class='text_coche'>Parqueadero</h3>
                                                         <select class='select_parqueadero'>
-                                                            <option value=''></option>
+                                                            <option value=''>ID: " . $parqueadero->getId() . " Nombre: " . $parqueadero->getNombre() . " Direccion: " . $parqueadero->getUbicacion() . "</option>
                                                         </select>
                                                     </div>
                                                     <div class='bahia'>
@@ -188,10 +193,9 @@
                                 echo "<p class='pago_inf'>Información del pago</p>
                                         <div class='div_pago'>
                                     <p class='p_no_realizado'>Pago no realizado!</p>
-                                    <button class='bot_pagar'>Pagar</button>
                                     </div>
                                 ";
-                            }            
+                            }
                             //Cerrar div 'coche'
                             echo "</div>";
                         }
@@ -204,7 +208,7 @@
                         </div>
                         ";
                 }
-                
+
             }
             else {
                  echo "<h2>Cliente no encontrado!</h2>";
@@ -213,83 +217,9 @@
         else {
            echo "<h2>No se puede conectar a base de datos!</h2>";
         }
-        $controlador->Desconectar(); 
-        
-    ?>
+        $controlador->Desconectar();
 
-    <h2>Coches</h2>
-    <div class='div_coches'>
-        <p class='veh_inf'>Información del vehículo</p>
-        <div class='coche'>
-            <div class='coche_1'>
-                <h3 class='text_coche'>Matricula</h3>
-                <input type='text' class='inputs_2' disabled value=''><br>
-            </div>
-            <div class='coche_2'>
-                <h3 class='text_coche'>Marca</h3>
-                <input type='text' class='inputs_2' disabled value=''><br>
-            </div>
-            <div class="coche_3">
-                <h3 class="text_coche">Tipo</h3>
-                <select class="select_tipo_coche">
-                    <option value="privado">Privado</option>
-                    <option value="publico">Publico</option>
-                </select>
-            </div>
-            <button class="bot_modificar_coche">Modificar</button>
-            <button class="bot_eliminar_coche">Eliminar coche</button>
-            <p class="pago_inf">Información del pago</p>
-            <div class="div_pago">
-                <div class="pago_1">
-                    <h3 class="text_coche">Numero de pago</h3>
-                    <input type="text" class="inputs_2" disabled value="x75834"><br>
-                </div>
-                <div class="pago_2">
-                    <h3 class="text_coche">Costo</h3>
-                    <input type="text" class="inputs_2" disabled value="25€"><br>
-                </div>
-                <div class="pago_3">
-                    <h3 class="text_coche">Fecha</h3>
-                    <input type="text" class="inputs_2" disabled value="1.10.2019"><br>
-                </div>
-                <div class="pago_4">
-                    <h3 class="text_coche">Hora</h3>
-                    <input type="text" class="inputs_2" disabled value="20:17"><br>
-                </div>
-                
-                <!--
-                <p class="p_no_realizado">Pago no realizado!</p>
-                -->
-            </div>
-            <p class='inf_parqueadero'>Informacion del parqueadero</p>
-            <div class='div_parqueadero'>
-                
-                <div class='parqueadero'>
-                    <h3 class='text_coche'>Parqueadero</h3>
-                    <select class='select_parqueadero'>
-                        <option value='privado'>Calle 12</option>
-                        <option value='publico'>calle 13</option>
-                    </select>
-                </div>
-                <div class='bahia'>
-                    <h3 class='text_coche'>Bahia</h3>
-                    <select class='select_bahia'>
-                        <option value='privado'>1</option>
-                        <option value='publico'>2</option>
-                    </select>
-                </div>
-                <button class='bot_asignar'>Asignar parqueadero</button>
-                
-                
-            </div>
-            
-        </div>
-        
-        <div id="noHayCoches">
-            <p class="noHayCochesText">Cliente no tiene coches registrados!</p>
-        </div>
-    </div>
 
-    <!-- un coment -->
+?>
 </body>
 </html>

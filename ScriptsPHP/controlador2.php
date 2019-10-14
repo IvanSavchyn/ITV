@@ -1,4 +1,4 @@
-<?php 
+<?php
     include("Logica/Conector.php");
     include("ModeloDao/PersonaDao.php");
     include("ModeloDao/VehiculoDao.php");
@@ -7,7 +7,7 @@
     include("ScriptsPHP/ModeloDao/ParqueaderoDao.php");
     class Controlador2 {
         private $bd;
-        
+
         public function __construct() {
             $this->bd = new Conector();
         }
@@ -54,5 +54,16 @@
             $parck = new ParqueaderoDao($this->bd->getBD());
             return $parck->getParqueadero($id);
         }
+        public function buscarClientes() {
+          $buscar = unserialize($_SESSION["user_buscar"]);
+          if(!is_null($buscar)) {
+              $personaDao = new PersonaDao($this->bd->getBD());
+              return $personaDao->buscarClientes($buscar->getDni(), $buscar->getNombre(), $buscar->getApellidos(), $buscar->getEmail(), $buscar->getTelefono());
+          }
+          else {
+              return null;
+          }
+        }
     }
+
 ?>

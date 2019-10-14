@@ -1,3 +1,4 @@
+DROP DATABASE itv;
 CREATE DATABASE itv;
 
 USE itv;
@@ -63,11 +64,14 @@ CREATE TABLE pagos(
     costo NUMERIC(6,2) NOT NULL,
     PRIMARY KEY(idPago),
     FOREIGN KEY (idBahia) REFERENCES bahias(idBahia) ON UPDATE CASCADE ON DELETE SET NULL,
-    FOREIGN KEY (idVehiculo) REFERENCES vehiculos(matricula) ON UPDATE CASCADE ON DELETE SET NULL  
+    FOREIGN KEY (idVehiculo) REFERENCES vehiculos(matricula) ON UPDATE CASCADE ON DELETE SET NULL
 );
 insert into tipovehiculos values ("privado", "1");
 insert into tipovehiculos values ("publico", "2");
 insert into personas values ("123456789", "123456789", "123456789","123456789","123456789","123456789", "false", "123456789");
+insert into personas values ("111111111", "111111111", "111111111", "111111111", "111111111", "111111111", "true", "111111111");
+insert into personas values ("222222222", "222222222", "222222222", "222222222", "222222222", "222222222", "true", "222222222");  
+insert into vehiculos values ("1234QQQ", "Volvo", "true", "111111111", "publico");
 insert into vehiculos values("1872HWN", "SEAT", "false", "123456789", "privado");
 insert into parqueaderos values ("1", "nomb1", "Getafe");
 insert into bahias values ("1", "1", "true");

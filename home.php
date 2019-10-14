@@ -1,11 +1,10 @@
 <?php 
     session_start();
+    include "ScriptsPHP/ModeloVo/PersonaVo.php";
 
-    $dni = $_SESSION["dni"];
-
-    //if(is_null($dni) || $dni == '') {
-        //header("Location: entrar.html");
-    //}
+    if(is_null($_SESSION["user"])) {
+        header("Location: entrar.html");
+    }
 ?>
 <html>
     <head>
@@ -41,23 +40,25 @@
 
     <h2>Mis datos</h2>
     <?php 
+        $user = $_SESSION["user"];
+        $user = unserialize($user);
         echo "
              <div id='div_datos'>
                 <div id='div_datos_1' class='datos'>
                     <h3>DNI</h3>
-                    <input type='text' class='inputs' disabled value='" . $_SESSION["dni"] . "'><br>
+                    <input type='text' class='inputs' disabled value='" . $user->getDni() . "'><br>
                     <h3>Nombre</h3>
-                    <input type='text' class='inputs' value='" . $_SESSION["nombre"] . "'><br>
+                    <input type='text' class='inputs' value='" . $user->getNombre() . "'><br>
                     <h3>Apellidos</h3>
-                    <input type='text' class='inputs' value='" . $_SESSION["apellidos"] . "'><br>
+                    <input type='text' class='inputs' value='" . $user->getApellidos() . "'><br>
                 </div>
                 <div id='div_datos_2' class='datos'>
                     <h3>Email</h3>
-                    <input type='text' class='inputs' value='" . $_SESSION["email"] . "'><br>
+                    <input type='text' class='inputs' value='" . $user->getEmail() . "'><br>
                     <h3>Telefono</h3>
-                    <input type='text' class='inputs' value='" . $_SESSION["telefono"] . "'><br>
+                    <input type='text' class='inputs' value='" . $user->getTelefono() . "'><br>
                     <h3>Dirección</h3>
-                    <input type='text' class='inputs' value='" . $_SESSION["direccion"] . "'><br>
+                    <input type='text' class='inputs' value='" . $user->getDireccion() . "'><br>
                 </div>
                 <div id='div_datos_3' class='datos'>
                     <h3>Contraseña</h3>
