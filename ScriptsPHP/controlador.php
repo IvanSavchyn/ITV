@@ -1,50 +1,77 @@
 <?php
-    include("ModeloVo/PersonaVo.php");
-    include("ModeloVo/VehiculoVo.php");
-    include("ModeloDao/PersonaDao.php");
-    include("ModeloDao/VehiculoDao.php");
     include("Logica/Conector.php");
-    include("ModeloDao/TarifaDao.php");
+    foreach ( glob(  'C:/xampp/htdocs/ITV/ITV/ScriptsPHP/ModeloVo/*.php') as $filename)
+    {
+        include_once $filename;
+    }
+    foreach ( glob(  'C:/xampp/htdocs/ITV/ITV/ScriptsPHP/ModeloDao/*.php') as $filename)
+    {
+        include_once $filename;
+    }
 
-    $func = strval($_POST["function"]);
+    $json = file_get_contents('php://input');
+     
+    //Comprobamos si datos eran enviados de un request Angular
+    if(json_decode($json)) { 
+        $es_angular = true; 
+    }
+    else {
+        $es_angular = false;    
+    }
+        
+    
+
+        
     $bd = new Conector();
     if($bd->getBD() != null) {
-        if(strcmp($func, "registrar") == 0) {
-            echo registrarCliente($bd->getBD());
+        if($es_angular == false) {
+            $func = strval($_POST["function"]);
+            if(strcmp($func, "registrar") == 0) {
+                echo registrarCliente($bd->getBD());
+            }
+            if(strcmp($func, "registrarCoche") == 0) {
+                echo registrarCoche($bd->getBD());
+            }
+            if(strcmp($func, "entrar") == 0) {
+                echo entrar($bd->getBD());
+            }
+            if(strcmp($func, "buscarCliente") == 0) {
+                buscarClientes();
+            }
+            if(strcmp($func, "selectCliente") == 0) {
+                selectCliente();
+            }
+            if(strcmp($func, "eliminarCliente") == 0) {
+                echo eliminarCliente($bd->getBD());
+            }
+            if(strcmp($func, "aceptarCliente") == 0) {
+                echo aceptarCliente($bd->getBD());
+            }
+            if(strcmp($func, "eliminarCoche") == 0) {
+                echo eliminarCoche($bd->getBD());
+            }
+            if(strcmp($func, "aceptarCoche") == 0) {
+                echo aceptarCoche($bd->getBD());
+            }
+            if(strcmp($func, "modificarCoche") == 0) {
+                echo modificarCoche($bd->getBD());
+            }
+            if(strcmp($func, "eliminarCoche") == 0) {
+                echo eliminarCoche($bd->getBD());
+            }
+            if(strcmp($func, "pagar") == 0) {
+                echo pagar($bd->getBD());
+            }
         }
-        if(strcmp($func, "registrarCoche") == 0) {
-            echo registrarCoche($bd->getBD());
+        else {
+            $obj = json_decode($json);
+            $func = $obj->data->function;
+            if(strcmp($func, "cambiarContrasenia") == 0) {
+                echo cambiarContrasenia($bd->getBD(), $obj->data->contr, $obj->data->contr2);
+            }
         }
-        if(strcmp($func, "entrar") == 0) {
-            echo entrar($bd->getBD());
-        }
-        if(strcmp($func, "buscarCliente") == 0) {
-            buscarClientes();
-        }
-        if(strcmp($func, "selectCliente") == 0) {
-            selectCliente();
-        }
-        if(strcmp($func, "eliminarCliente") == 0) {
-            echo eliminarCliente($bd->getBD());
-        }
-        if(strcmp($func, "aceptarCliente") == 0) {
-            echo aceptarCliente($bd->getBD());
-        }
-        if(strcmp($func, "eliminarCoche") == 0) {
-            echo eliminarCoche($bd->getBD());
-        }
-        if(strcmp($func, "aceptarCoche") == 0) {
-            echo aceptarCoche($bd->getBD());
-        }
-        if(strcmp($func, "modificarCoche") == 0) {
-            echo modificarCoche($bd->getBD());
-        }
-        if(strcmp($func, "eliminarCoche") == 0) {
-            echo eliminarCoche($bd->getBD());
-        }
-        if(strcmp($func, "pagar") == 0) {
-            echo pagar($bd->getBD());
-        }
+        
+        
     }
     else {
         echo "Error en conectarse a base de datos" . $bd->getError();
@@ -174,17 +201,43 @@
               $hora += 2;
             }
             $hora = $hora . ":" . $min;
+            
             $pago = new PagoVo("",null,$_POST["matricula"], $hora, $fecha, $tarifa->getCosto());
             $pagoDao = new PagoDao($bd);
+            
             if($pagoDao->pagar($pago)) {
-              echo "Pagado correctamente!";
+              echo "Paga realizado correctamente!";
             }
             else {
-              echo "Error en pagar!";
+              echo "Pago no realizado!";
             }
         }
         else {
           echo "Error!";
+        }
+    }
+    function cambiarContrasenia($bd, $contr1, $contr2) {
+        session_start();
+        $persona = unserialize($_SESSION["user"]);
+        if(strcmp($persona->getContrasenia(), $contr1) == 0) {
+            if(strcmp($persona->getContrasenia(), $contr2) != 0) {
+                $persona->setNuevaContrasenia($contr2);
+                $personaDao = new PersonaDao($bd);
+                if($personaDao->modificarContrasenia($persona)) {
+                    $persona->setContrasenia($contr2);
+                    $_SESSION["user"] = serialize($persona);
+                    echo "Contraseña modificada!";
+                 }
+                else {
+                    echo "No se puede modificar contraseña!";
+                }
+            }
+            else {
+                echo "Nueva contraseña no puede coincidir con contraseña actual!";
+            }
+        }
+        else {
+            return "Contraseña incorrecta!";
         }
     }
 

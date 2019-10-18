@@ -30,7 +30,7 @@
             }
         }
         public function getClientes($aceptado) {
-            include 'ScriptsPHP/ModeloVo/PersonaVo.php';
+            
             $consulta = "SELECT * FROM personas WHERE aceptado = '" . $aceptado ."';";
             $result = mysqli_query($this->bd, $consulta);
             if(mysqli_num_rows($result) == 0) {
@@ -47,7 +47,7 @@
             }
         }
         public function getClientePorDni($dni) {
-            include 'ScriptsPHP/ModeloVo/PersonaVo.php';
+            
             $consulta = "SELECT * FROM personas WHERE dni = '" . $dni ."';";
             $result = mysqli_query($this->bd, $consulta);
             if(mysqli_num_rows($result) == 0) {
@@ -123,6 +123,15 @@
             }
             else {
                 return "No se puede aceptar cliente!";
+            }
+        }
+        public function modificarContrasenia($persona) {
+            $consulta = "UPDATE personas SET contrasenia='" . $persona->getNuevaContrasenia() . "' WHERE dni='" . $persona->getDni() . "';";
+            if(mysqli_query($this->bd, $consulta)) {
+                return true;
+            }
+            else {
+                return false;
             }
         }
     }

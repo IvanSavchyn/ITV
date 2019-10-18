@@ -1,5 +1,4 @@
 <?php
-    include "ScriptsPHP/ModeloVo/PagoVo.php";
     class PagoDao {
         private $bd;
 
@@ -23,12 +22,12 @@
             }
         }
         public function pagar($pago) {
-          $consulta = "INSERT INTO pagos VALUES($pago->getId(), $pago->getIdBahia(), $pago->getIdVehiculo, $pago->getHora(), $pago->getFecha(), $pago->getCosto());";
+          $consulta = "INSERT INTO pagos VALUES('',NULL,'" . $pago->getIdVehiculo() . "','" . $pago->getHora() . "','" . $pago->getFecha() . "','" . $pago->getCosto() . "');";
           if(mysqli_query($this->bd, $consulta)) {
             return true;
           }
           else {
-            return false;
+            return mysqli_error($this->bd);
           }
         }
     }

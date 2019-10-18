@@ -1,10 +1,13 @@
 <?php
     include("Logica/Conector.php");
-    include("ModeloDao/PersonaDao.php");
-    include("ModeloDao/VehiculoDao.php");
-    include("ModeloDao/PagoDao.php");
-    include("ScriptsPHP/ModeloDao/BahiaDao.php");
-    include("ScriptsPHP/ModeloDao/ParqueaderoDao.php");
+    foreach ( glob(  'C:/xampp/htdocs/ITV/ITV/ScriptsPHP/ModeloVo/*.php') as $filename)
+    {
+        include_once $filename;
+    }
+    foreach ( glob(  'C:/xampp/htdocs/ITV/ITV/ScriptsPHP/ModeloDao/*.php') as $filename)
+    {
+        include_once $filename;
+    }
     class Controlador2 {
         private $bd;
 

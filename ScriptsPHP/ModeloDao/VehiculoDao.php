@@ -30,8 +30,7 @@
             }
         }
         public function getCochesNoAceptados() {
-            include 'ScriptsPHP/ModeloVo/PersonaVo.php';
-            include 'ScriptsPHP/ModeloVo/VehiculoVo.php';
+
             $consulta = "SELECT v.matricula, v.marca , v.idTipo, p.dni, p.nombre, p.apellidos
             FROM vehiculos v, personas p
             WHERE p.dni = v.idPersona AND v.aceptado = 'false';";
@@ -54,7 +53,7 @@
             }
         }
         public function getCochesCliente($dni) {
-          include 'ScriptsPHP/ModeloVo/VehiculoVo.php';
+          
             $consulta = "SELECT * FROM vehiculos WHERE idPersona = '" . $dni . "'";
             $result = mysqli_query($this->bd, $consulta);
             if(mysqli_num_rows($result) == 0) {

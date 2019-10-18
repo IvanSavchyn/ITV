@@ -49,27 +49,27 @@
                     <h3>DNI</h3>
                     <input type='text' class='inputs' disabled value='" . $user->getDni() . "'><br>
                     <h3>Nombre</h3>
-                    <input type='text' class='inputs' value='" . $user->getNombre() . "'><br>
+                    <input type='text' id='nombre' class='inputs' value='" . $user->getNombre() . "'><br>
                     <h3>Apellidos</h3>
-                    <input type='text' class='inputs' value='" . $user->getApellidos() . "'><br>
+                    <input type='text' id='apellidos' class='inputs' value='" . $user->getApellidos() . "'><br>
                 </div>
                 <div id='div_datos_2' class='datos'>
                     <h3>Email</h3>
-                    <input type='text' class='inputs' value='" . $user->getEmail() . "'><br>
+                    <input type='text' id='email' class='inputs' value='" . $user->getEmail() . "'><br>
                     <h3>Telefono</h3>
-                    <input type='text' class='inputs' value='" . $user->getTelefono() . "'><br>
+                    <input type='text' id='telefono' class='inputs' value='" . $user->getTelefono() . "'><br>
                     <h3>Dirección</h3>
-                    <input type='text' class='inputs' value='" . $user->getDireccion() . "'><br>
+                    <input type='text' id='direccion' class='inputs' value='" . $user->getDireccion() . "'><br>
                 </div>
                 <div id='div_datos_3' class='datos'>
                     <h3>Contraseña</h3>
-                    <input type='password' class='inputs'><br>
+                    <input ng-model='contr' type='password' class='inputs'><br>
                     <h3>Nueva contraseña</h3>
-                    <input type='text' class='inputs'><br>
+                    <input ng-model='contr2' type='text' class='inputs'><br>
                     <h3>Repetir Contraseña</h3>
-                    <input type='text' class='inputs'><br>
+                    <input id='contr3' type='text' class='inputs'><br>
                 </div>
-                <button id='bot_modificar'>Modificar</button>
+                <button id='bot_modificar' ng-controller='modificar' ng-click='modificarContrasenia()'>Modificar</button>
             </div>
         ";
     ?>

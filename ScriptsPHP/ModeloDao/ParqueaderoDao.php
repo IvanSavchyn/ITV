@@ -5,7 +5,7 @@
             $this->bd = $bd;
         }
         public function getParqueadero($id) {
-            include 'ScriptsPHP/ModeloVo/ParqueaderoVo.php';
+           
             $consulta = "SELECT * FROM parqueaderos  WHERE idParqueadero = '" . $id . "';";
             $result = mysqli_query($this->bd, $consulta);
             if(mysqli_num_rows($result) == 0) {

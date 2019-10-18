@@ -5,7 +5,6 @@
             $this->bd = $bd;
         }
         public function getBahia($id) {
-            include 'ScriptsPHP/ModeloVo/BahiaVo.php';
             $consulta = "SELECT * FROM bahias WHERE idBahia = '" . $id . "'";
             $result = mysqli_query($this->bd, $consulta);
             if(mysqli_num_rows($result) == 0) {

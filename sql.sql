@@ -50,7 +50,7 @@ CREATE TABLE bahias(
 
 CREATE TABLE pagos(
     idPago INTEGER AUTO_INCREMENT,
-    idBahia VARCHAR(5),
+    idBahia VARCHAR(5) DEFAULT NULL,
     idVehiculo VARCHAR(10),
     hora TIME NOT NULL,
     fecha DATE NOT NULL,
