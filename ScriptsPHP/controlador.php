@@ -4,6 +4,7 @@
     include("ModeloDao/PersonaDao.php");
     include("ModeloDao/VehiculoDao.php");
     include("Logica/Conector.php");
+    include("ModeloDao/TarifaDao.php");
 
     $func = strval($_POST["function"]);
     $bd = new Conector();
@@ -34,6 +35,15 @@
         }
         if(strcmp($func, "aceptarCoche") == 0) {
             echo aceptarCoche($bd->getBD());
+        }
+        if(strcmp($func, "modificarCoche") == 0) {
+            echo modificarCoche($bd->getBD());
+        }
+        if(strcmp($func, "eliminarCoche") == 0) {
+            echo eliminarCoche($bd->getBD());
+        }
+        if(strcmp($func, "pagar") == 0) {
+            echo pagar($bd->getBD());
         }
     }
     else {
@@ -138,6 +148,44 @@
     function aceptarCoche($bd){
         $vehiculo = new VehiculoDao($bd);
         return $vehiculo->aceptarCoche($_POST["matricula"]);
+    }
+    function modificarCoche($bd) {
+        $vehiculo = new VehiculoDao($bd);
+        return $vehiculo->modificarCoche($_POST["matricula"], $_POST["tipo"]);
+    }
+    function pagar($bd) {
+        $tarifaDao = new TarifaDao($bd);
+        $vehiculo = new VehiculoDao($bd);
+        $coche = $vehiculo->getCoche($_POST["matricula"]);
+        $tarifa = $tarifaDao->getTarifa($coche->getTipo());
+        if(!is_null($tarifa)) {
+            setlocale(LC_ALL, "es_ES");
+            $fecha = date("Y-m-d");
+            $t = time();
+            $hora = $t / 3600 % 24;
+            $min = $t / 60 % 60;
+            if($hora + 2 == 24) {
+              $hora = 00 . "";
+            }
+            elseif ($hora + 2 == 25) {
+              $hora = 01 . "";
+            }
+            else {
+              $hora += 2;
+            }
+            $hora = $hora . ":" . $min;
+            $pago = new PagoVo("",null,$_POST["matricula"], $hora, $fecha, $tarifa->getCosto());
+            $pagoDao = new PagoDao($bd);
+            if($pagoDao->pagar($pago)) {
+              echo "Pagado correctamente!";
+            }
+            else {
+              echo "Error en pagar!";
+            }
+        }
+        else {
+          echo "Error!";
+        }
     }
 
 

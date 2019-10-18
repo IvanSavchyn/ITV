@@ -1,32 +1,26 @@
-<?php 
+<?php
     class TarifaVo {
-        private $id;
         private $costo;
-        private $idTipo;
-        
-        public function __construct($id, $costo, $idTipo) {
-            $this->id = $id;
+        private $tipo;
+
+        public function __construct($tipo, $costo) {
             $this->costo = $costo;
-            $this->idTipo = $idTipo;
+            $this->tipo = $tipo;
         }
-        
-        public function setId($id) {
-            $this->id = $id;
-        }
+
+
         public function setCosto($costo) {
              $this->costo = $costo;
         }
-        public function setIdTipo($idTipo) {
-            $this->idTipo = $idTipo;
+        public function setTipo($tipo) {
+            $this->tipo = $tipo;
         }
-        public function getId() {
-            return $this->id;
-        }
+
         public function getCosto() {
             return $this->costo;
         }
-        public function getIdTipo() {
-            return $this->idTipo;
+        public function getTipo() {
+            return $this->tipo;
         }
     }
 ?>

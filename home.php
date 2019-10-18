@@ -1,9 +1,9 @@
-<?php 
+<?php
     session_start();
     include "ScriptsPHP/ModeloVo/PersonaVo.php";
 
     if(is_null($_SESSION["user"])) {
-        header("Location: entrar.html");
+        //header("Location: entrar.html");
     }
 ?>
 <html>
@@ -12,6 +12,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js">
         </script>
         <script src="Scripts/index.js"></script>
+        <script src="Scripts/script-home.js"></script>
         <link href='https://fonts.googleapis.com/css?family=Playfair Display SC' rel='stylesheet'>
         <link href="Style/style-home.css" rel="stylesheet">
         <meta charset="UTF-8">
@@ -39,7 +40,7 @@
     </div>
 
     <h2>Mis datos</h2>
-    <?php 
+    <?php
         $user = $_SESSION["user"];
         $user = unserialize($user);
         echo "
@@ -72,25 +73,25 @@
             </div>
         ";
     ?>
-    
+
     <h2>Mis coches</h2>
-    
-     <?php 
+
+     <?php
         include ("ScriptsPHP/controlador2.php");
         $controlador = new Controlador2();
         if($controlador->ComprobarConexion()) {
-            
-            
+
+
             $coches = $controlador->getCochesCliente("123456789");
-            
-            
-            
+
+
+
             if(!is_null($coches)) {
                 echo "<div class='div_coches'>";
                 for($i = 0; $i < sizeof($coches); $i++) {
                     echo "
                         <p class='veh_inf'>Información del vehículo</p>
-                            <div class='coche'>
+                            <div class='coche' id=\"" . $i . "\">
                                 <div class='coche_1'>
                                     <h3 class='text_coche'>Matricula</h3>
                                     <input type='text' class='inputs_2' disabled value='" . $coches[$i]->getId() . "'><br>
@@ -102,23 +103,23 @@
                                 <div class='coche_3'>
                                     <h3 class='text_coche'>Tipo</h3>";
                                     if(strcmp($coches[$i]->getTipo(), "privado") == 0) {
-                                        echo "<select class='select_tipo_coche'>           
+                                        echo "<select class='select_tipo_coche' id='tipo" . $i ."'>
                                                     <option value='privado' selected='true'>Privado</option>
                                                     <option value='publico'>Publico</option>
                                             </select>";
                                     }else {
-                                        echo "<select class='select_tipo_coche'>
+                                        echo "<select class='select_tipo_coche' id='tipo" . $i ."'>
                                                     <option value='privado'>Privado</option>
                                                     <option value='publico' selected='true'>Publico</option>
                                             </select>";
                                     }
-                                    
+
                                 echo "
-                                
+
                                 </div>
-                                <button class='bot_modificar_coche'>Modificar</button>
-                                <button class='bot_eliminar_coche'>Eliminar coche</button>
-                                
+                                <button class='bot_modificar_coche' onclick='modificarCoche(\"" . $coches[$i]->getId() . "\", \"tipo" . $i ."\")'>Modificar</button>
+                                <button class='bot_eliminar_coche' onclick='eliminarCoche(\"" . $coches[$i]->getId() . "\", \"" . $i . "\")'>Eliminar coche</button>
+
                             ";
                         $pago = $controlador->getPago($coches[$i]->getId());
                     if(!is_null($pago)) {
@@ -141,7 +142,7 @@
                                 <h3 class='text_coche'>Hora</h3>
                                 <input type='text' class='inputs_2' disabled value='" . $pago->getHora() . "'><br>
                             </div>
-                            
+
                             </div>
                         ";
                         //Cerrar div 'pago'
@@ -159,7 +160,7 @@
                                     <div class='bahia'>
                                         <h3 class='text_coche'>Bahia</h3>
                                         <input type='text' class='inputs_2' disabled value='ID: " . $bahia->getIdBahia() . " :Disponible:  " . $bahia->getDisponible() ."'><br>
-                                    </div> 
+                                    </div>
                                 </div>
                             ";
                         }
@@ -167,25 +168,27 @@
                             echo "
                                 <p class='inf_parqueadero'>Informacion del parqueadero</p>
                                 <div class='div_parqueadero'>
-                                    <p class='park_no_asignado'>Parqueadero no asignado!</p> 
+                                    <p class='park_no_asignado'>Parqueadero no asignado!</p>
                                 </div>
                             ";
                         }
-                        
-                        
+
+
                     }
                     else {
                         echo "<p class='pago_inf'>Información del pago</p>
                                 <div class='div_pago'>
                             <p class='p_no_realizado'>Pago no realizado!</p>
-                            <button class='bot_pagar'>Pagar</button>
+                            <button class='bot_pagar' onclick='pagar(\"" . $coches[$i]->getId() . "\")'>Pagar</button>
                             </div>
+
+
                         ";
-                    }            
+                    }
                     //Cerrar div 'coche'
                     echo "</div>";
-                        
-                } 
+
+                }
                 //Cerrar div 'div_coches'
                 echo "</div>";
             }
@@ -201,7 +204,7 @@
         }
         $controlador->Desconectar();
     ?>
-    
+
 
     <!-- un coment -->
 </body>

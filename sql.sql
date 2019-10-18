@@ -3,18 +3,11 @@ CREATE DATABASE itv;
 
 USE itv;
 
-CREATE TABLE tipoVehiculos(
-    idTipo VARCHAR(7) NOT NULL,
-    clase VARCHAR(10) NOT NULL UNIQUE,
-    PRIMARY KEY (idTipo)
-);
 
 CREATE TABLE tarifas (
-    idTarifa VARCHAR(3),
+    Tipo VARCHAR(7) NOT NULL,
     costo NUMERIC(6,2) NOT NULL,
-    idTipo VARCHAR(3),
-    PRIMARY KEY (idTarifa),
-    FOREIGN KEY (idTipo) REFERENCES tipoVehiculos (idTipo) ON UPDATE CASCADE ON DELETE SET NULL
+    PRIMARY KEY (Tipo)
 );
 
 CREATE TABLE personas (
@@ -37,7 +30,7 @@ CREATE TABLE vehiculos(
     idTipo VARCHAR(7),
     PRIMARY KEY(matricula),
     FOREIGN KEY(idPersona) REFERENCES personas(dni) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY(idTipo) REFERENCES tipoVehiculos(idTipo) ON DELETE SET NULL ON UPDATE CASCADE
+    FOREIGN KEY(idTipo) REFERENCES tarifas(Tipo) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 CREATE TABLE parqueaderos(
@@ -56,7 +49,7 @@ CREATE TABLE bahias(
 );
 
 CREATE TABLE pagos(
-    idPago VARCHAR(5),
+    idPago INTEGER AUTO_INCREMENT,
     idBahia VARCHAR(5),
     idVehiculo VARCHAR(10),
     hora TIME NOT NULL,
@@ -66,14 +59,16 @@ CREATE TABLE pagos(
     FOREIGN KEY (idBahia) REFERENCES bahias(idBahia) ON UPDATE CASCADE ON DELETE SET NULL,
     FOREIGN KEY (idVehiculo) REFERENCES vehiculos(matricula) ON UPDATE CASCADE ON DELETE SET NULL
 );
-insert into tipovehiculos values ("privado", "1");
-insert into tipovehiculos values ("publico", "2");
+insert into tarifas values ("privado", "25,30");
+insert into tarifas values ("publico", "35.20");
 insert into personas values ("123456789", "123456789", "123456789","123456789","123456789","123456789", "false", "123456789");
 insert into personas values ("111111111", "111111111", "111111111", "111111111", "111111111", "111111111", "true", "111111111");
-insert into personas values ("222222222", "222222222", "222222222", "222222222", "222222222", "222222222", "true", "222222222");  
+insert into personas values ("222222222", "222222222", "222222222", "222222222", "222222222", "222222222", "true", "222222222");
 insert into personas values ("333333333", "333333333", "333333333", "333333333", "333333333", "333333333", "false", "333333333");
 insert into vehiculos values ("1234QQQ", "Volvo", "true", "111111111", "publico");
 insert into vehiculos values("1872HWN", "SEAT", "false", "123456789", "privado");
+insert into vehiculos values("1111QQE", "Mercedes", "true", "123456789","publico");
 insert into parqueaderos values ("1", "nomb1", "Getafe");
 insert into bahias values ("1", "1", "true");
-insert into pagos values ("1", "1", "1872HWN", "22:10", "2019-10-11", "25.03");
+insert into pagos values ("","1", "1872HWN", "22:10", "2019-10-11", "25.03");
+insert into pagos values ("",NULL, "1234QQQ", "15:00", "2019-10-15", "26.00");
