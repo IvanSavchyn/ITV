@@ -34,6 +34,34 @@
                 return $bahias;
             }
         }
+        public function insertarBahia($bahia) {
+            $consulta = "INSERT INTO bahias VALUES ('" . $bahia->getIdBahia() ."', '" . $bahia->getIdParqueadero() . "', '" . $bahia->getDisponible() . "');";
+            if(mysqli_query($this->bd, $consulta)) {
+                return true;
+            }
+            else {
+                return false;
+            }
+
+        }
+        public function eliminarBahia($id) {
+            $consulta = "DELETE FROM bahias WHERE idBahia='" . $id . "';";
+            if(mysqli_query($this->bd, $consulta)) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        public function modificarBahia($bahia) {
+            $consulta = "UPDATE bahias SET idParqueadero='" . $bahia->getIdParqueadero() . "', disponible='" . $bahia->getDisponible() . "' WHERE idBahia='" . $bahia->getIdBahia() . "';";
+            if(mysqli_query($this->bd, $consulta)) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
 
     }
 ?>

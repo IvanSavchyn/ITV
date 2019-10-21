@@ -84,6 +84,43 @@
                 $resp["error"]="-1";
                 echo json_encode($resp);
             }
+            if(strcmp($func, "insertarParqueadero") == 0) {
+              $resp = insertarParqueadero($bd->getBD(), $obj);
+              $resp["error"]="-1";
+              echo json_encode($resp);
+            }
+            if(strcmp($func, "eliminarParqueadero") == 0) {
+              $resp = eliminarParqueadero($bd->getBD(), $obj->data);
+              $resp["error"]="-1";
+              echo json_encode($resp);
+            }
+            if(strcmp($func, "insertarBahia") == 0) {
+              $resp = insertarBahia($bd->getBD(), $obj->data);
+              $resp["error"]="-1";
+              echo json_encode($resp);
+            }
+            if(strcmp($func, "eliminarBahia") == 0) {
+              $resp = eliminarBahia($bd->getBD(), $obj->data);
+              $resp["error"]="-1";
+              echo json_encode($resp);
+            }
+            if(strcmp($func, "modificarBahia") == 0) {
+              $resp = modificarBahia($bd->getBD(), $obj->data);
+              $resp["error"]="-1";
+              echo json_encode($resp);
+            }
+            if(strcmp($func, "modificarTarifa") == 0) {
+              $resp = modificarTarifa($bd->getBD(), $obj->data);
+              $resp["error"]="-1";
+              echo json_encode($resp);
+            }
+            if(strcmp($func, "salir") == 0) {
+              salir();
+              $res = array();
+              $res["error"] = "-1";
+              $res["codigo"] = 0;
+              echo json_encode($res);
+            }
         }
 
 
@@ -93,13 +130,17 @@
         echo "Error en conectarse a base de datos" . $bd->getError();
       }
       else {
-        $resp = array("error" =>"Error en conectarse a base de datos");
+        $resp = array("error" =>"Error en conectarse a base de datos" . $bd->getError());
         echo json_encode($resp);
       }
     }
     $bd->Desconectar();
 
-
+    function salir() {
+      session_start();
+      session_unset();
+      session_destroy();
+    }
     function registrarCliente($bd) {
         $resultado = "";
         $personaVo = new PersonaVo($_POST["dni"], $_POST["nombre"], $_POST["apellidos"], $_POST["email"], $_POST["telefono"], $_POST["direccion"],"false", $_POST["contr"]);
@@ -365,7 +406,7 @@
     }
     function asignarBahia($bd, $obj) {
       $result = array();
-      $pago = new PAgoVo($obj->data->pago, $obj->data->bahia, "","","","");
+      $pago = new PagoVo($obj->data->pago, $obj->data->bahia, "","","","");
       $pagoDao = new PagoDao($bd);
       if($pagoDao->asignarBahia($pago)) {
         $result["info"] = "Bahia asignada correctamente!";
@@ -373,6 +414,88 @@
       }
       else {
         $result["info"] = "No se puede asignar bahia!";
+        $result["codigo"] = -1;
+      }
+      return $result;
+    }
+    function insertarParqueadero($bd, $obj) {
+      $result = array();
+      $parck = new ParqueaderoVo($obj->data->id, $obj->data->nombre, $obj->data->ubicacion);
+      $parckDao = new ParqueaderoDao($bd);
+      if($parckDao->insertParqueadero($parck)) {
+        $result["info"] = "Parqueadero insertado!";
+        $result["codigo"] = 0;
+      }
+      else {
+        $result["info"] = "No se pudo insertar parqueadero!";
+        $result["codigo"] = -1;
+      }
+      return $result;
+    }
+    function eliminarParqueadero($bd, $data) {
+      $result = array();
+      $parckDao = new ParqueaderoDao($bd);
+      if($parckDao->eliminarParqueadero($data->id)) {
+        $result["info"] = "Parqueadero eliminado!";
+        $result["codigo"] = 0;
+      }
+      else {
+        $result["info"] = "No se pudo eliminar parqueadero!";
+        $result["codigo"] = -1;      
+      }
+      return $result;
+    }
+    function insertarBahia($bd, $data) {
+      $result = array();
+      $bahia = new BahiaVo($data->id, $data->idParqueadero, $data->disponible);
+      $bahiaDao = new BahiaDao($bd);
+      if($bahiaDao->insertarBahia($bahia)) {
+        $result["info"] = "Bahia insertada!";
+        $result["codigo"] = 0;
+      }
+      else {
+        $result["info"] = "No se pudo insertar bahia!";
+        $result["codigo"] = -1;
+      }
+      return $result;
+    }
+    function eliminarBahia($bd, $data) {
+      $result = array();
+      $bahiaDao = new BahiaDao($bd);
+      if($bahiaDao->eliminarBahia($data->id)) {
+        $result["info"] = "Bahia eliminada!";
+        $result["codigo"] = 0;
+      }
+      else {
+        $result["info"] = "No se pudo eliminar bahia!";
+        $result["codigo"] = -1;
+      }
+      return $result;
+    }
+    function modificarBahia($bd, $data) {
+      $result = array();
+      $bahia = new BahiaVo($data->id, $data->idParqueadero, $data->disponible);
+      $bahiaDao = new BahiaDao($bd);
+      if($bahiaDao->modificarBahia($bahia)) {
+        $result["info"] = "Bahia modificada!";
+        $result["codigo"] = 0;
+      }
+      else {
+        $result["info"] = "No se pudo modificar bahia!";
+        $result["codigo"] = -1;
+      }
+      return $result;
+    }
+    function modificarTarifa($bd, $data) {
+      $result = array();
+      $tarifa = new TarifaVo($data->tipo, $data->costo);
+      $tarifaDao = new TarifaDao($bd);
+      if($tarifaDao->modificarTarifa($tarifa)) {
+        $result["info"] = "Tarifa modificado!";
+        $result["codigo"] = 0;
+      }
+      else {
+        $result["info"] = "No se pudo modificar tarifa!";
         $result["codigo"] = -1;
       }
       return $result;

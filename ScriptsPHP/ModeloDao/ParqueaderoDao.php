@@ -32,5 +32,23 @@
             return $parqueaderos;
           }
         }
+        public function insertParqueadero($parck) {
+            $consulta = "INSERT INTO parqueaderos VALUES('" . $parck->getId() . "', '" . $parck->getNombre() . "', '" . $parck->getUbicacion() . "');";
+            if(mysqli_query($this->bd, $consulta)) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        public function eliminarParqueadero($id) {
+            $consulta = "DELETE FROM parqueaderos WHERE idParqueadero='" . $id . "';";
+            if(mysqli_query($this->bd, $consulta)) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
     }
 ?>

@@ -33,5 +33,14 @@
             return $tarifas;
           }
         }
+        public function modificarTarifa($tarifa) {
+          $consulta  = "UPDATE tarifas SET costo='" . $tarifa->getCosto() . "' WHERE Tipo='" . $tarifa->getTipo() . "';";
+          if(mysqli_query($this->bd, $consulta)) {
+            return true;
+          }
+          else {
+            return false;
+          }
+        }
     }
 ?>

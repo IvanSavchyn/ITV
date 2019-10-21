@@ -1,9 +1,24 @@
+<?php
+    session_start();
+    include "ScriptsPHP/ModeloVo/PersonaVo.php";
+
+    if(is_null($_SESSION["user"])) {
+        header("Location: entrar.html");
+    }
+    else {
+      $user = unserialize($_SESSION["user"]);
+      if(strcmp("admin", $user->getAceptado()) != 0) {
+        header("Location: home.php");
+      }
+    }
+?>
 <html>
     <head>
         <link rel="stylesheet" href="Style/style-index.css">
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js">
         </script>
         <script src="Scripts/index.js"></script>
+        <script src="Scripts/script-panel-admin.js"></script>
         <link href='https://fonts.googleapis.com/css?family=Playfair Display SC' rel='stylesheet'>
         <link href="Style/style-panel-admin.css" rel="stylesheet">
         <title>Configuracion</title>
@@ -13,13 +28,12 @@
     <div id="bloquear" ng-controller="myCTRL" ng-click="cerrar_menu()"></div>
     <div id="menu">
         <div id="menu_items">
-        <div class="menu_item" ng-controller="go_to" ng-click="open_registr()"><a href="#">Registrar cliente</a><img src="Images/add-user-button.png" class="img_item_menu"></div>
-        <div class="menu_item" ng-controller="go_to" ng-click="open_registrar_vehiculo()"><a href="registro.html">Registrar vehiculo</a><img src="Images/add-plus-button.png" class="img_item_menu"></div>
-        <div class="menu_item" ng-controller="go_to" ng-click="open_clientes()"><a href="#">Clientes</a><img src="Images/two-men.png" class="img_item_menu"></div>
-        <div class="menu_item" ng-controller="go_to" ng-click="open_validar_cliente()"><a href="#">Validar cliente</a><img src="Images/verification-mark.png" class="img_item_menu"></div>
-        <div class="menu_item" ng-controller="go_to" ng-click="open_validar_coches()"><a href="#">Validar Coches</a><img src="Images/front-car.png" class="img_item_menu"></div>
-        <div class="menu_item" ng-controller="go_to" ng-click="open_config()"><a href="#">Configuracion</a><img src="Images/settings-cogwheel-button.png" class="img_item_menu"></div>
-        <div class="menu_item" ng-controller="go_to" ng-click="salir()"><a href="#">Salir</a><img src="Images/settings-cogwheel-button.png" class="img_item_menu"></div>
+        <div class='menu_item' ng-controller='go_to' ng-click='open_registrar_vehiculo()'><a href='#'>Registrar vehiculo</a><img src='Images/add-plus-button.png' class='img_item_menu'></div>
+        <div class='menu_item' ng-controller='go_to' ng-click='open_clientes()'><a href='#'>Clientes</a><img src='Images/two-men.png' class='img_item_menu'></div>
+        <div class='menu_item' ng-controller='go_to' ng-click='open_validar_cliente()'><a href='#'>Validar cliente</a><img src='Images/verification-mark.png' class='img_item_menu'></div>
+        <div class='menu_item' ng-controller='go_to' ng-click='open_validar_coches()'><a href='#'>Validar Coches</a><img src='Images/front-car.png' class='img_item_menu'></div>
+        <div class='menu_item' ng-controller='go_to' ng-click='open_config()'><a href='#'>Configuracion</a><img src='Images/settings-cogwheel-button.png' class='img_item_menu'></div>
+        <div class='menu_item' ng-controller='go_to' ng-click='salir()'><a href='#'>Salir</a><img src='Images/cancel-button.png' class='img_item_menu'></div>
 
         </div>
     </div>
@@ -55,7 +69,7 @@
                   <h3>Ubicacion</h3>
                   <input type='text' class='inputs' id='parck3'><br>
               </div>
-              <button class='bot_insertar' ng-controller='panelAdmin' ng-click='insertar(1)'>Añadir</button>
+              <button class='bot_insertar' ng-controller='panelAdmin' ng-click='insertarParqueadero()'>Añadir</button>
         </div>
     ";
     $controlador = new Controlador2();
@@ -67,7 +81,7 @@
         ";
           for($i = 0; $i < sizeof($parck); $i++) {
             echo "
-            <div class='parqueadero' id='parck" . $parck[$i]->getId() . "'>
+            <div class='parqueadero' id='div_parck" . $parck[$i]->getId() . "'>
                 <div class='div_datos_1' class='datos'>
                     <h3>ID</h3>
                     <input type='text' class='inputs' disabled value='" . $parck[$i]->getId() . "'><br>
@@ -80,7 +94,7 @@
                     <h3>Ubicacion</h3>
                     <input type='text' class='inputs' disabled value='" . $parck[$i]->getUbicacion() . "'><br>
                 </div>
-                <button class='bot_eliminar' ng-controller='panelAdmin' ng-click='eliminar(\"parck" . $parck[$i]->getId() . "\", 1)'>Eliminar</button>
+                <button class='bot_eliminar' ng-controller='panelAdmin' ng-click='eliminarParqueadero(\"" . $parck[$i]->getId() . "\")'>Eliminar</button>
             </div>
             ";
           }
@@ -91,7 +105,7 @@
       }
       else {
         echo "
-        <div class='parqueadero' id=''>
+        <div class='parqueadero'>
             <h2>No hay parqueaderos!</h2>
         </div>
         ";
@@ -122,7 +136,7 @@
                         <option value='false'>No</option>
                 </select>
             </div>
-            <button class='bot_insertar' ng-controller='panelAdmin' ng-click='insertar(2)'>Añadir</button>
+            <button class='bot_insertar' ng-controller='panelAdmin' ng-click='insertarBahia()'>Añadir</button>
         </div>
       ";
       $bahias = $controlador->selectBahias();
@@ -132,14 +146,14 @@
             <h3 class='insert_parqueadero'>Bahias</h3>
           ";
           for($i = 0; $i < sizeof($bahias); $i++) {
-              echo "   <div class='bahia'>
+              echo "   <div class='bahia' id='div_bahia" . $bahias[$i]->getIdBahia() . "'>
                       <div class='div_datos_1' class='datos'>
                           <h3>ID</h3>
                           <input disabled type='text' class='inputs' value='" . $bahias[$i]->getIdBahia() . "'><br>
                       </div>
                       <div class='div_datos_2' class='datos'>
                           <h3>Parqueadero</h3>
-                          <select class='selecT'>";
+                          <select class='selecT' id='parck_bahia" . $bahias[$i]->getIdBahia() . "'>";
                             for($j = 0; $j < sizeof($parck); $j++) {
                               if(strcmp($parck[$j]->getId(), $bahias[$i]->getIdParqueadero()) == 0) {
                                 echo "<option value='" . $parck[$j]->getId() . "' selected='true'>ID: " . $parck[$j]->getId() . " Nombre: " . $parck[$j]->getNombre() . "</option>";
@@ -152,7 +166,7 @@
                       </div>
                       <div class='div_datos_3' class='datos'>
                           <h3>Disponible</h3>
-                          <select class='selecT'>";
+                          <select class='selecT' id='disponible_bahia" . $bahias[$i]->getIdBahia() . "'> ";
                                 if(strcmp($bahias[$i]->getDisponible(), "true") == 0) {
                                   echo "<option value='true' selected='true'>Si</option>
                                   <option value='false'>No</option>";
@@ -163,8 +177,8 @@
                                 }
                           echo "</select>
                       </div>
-                      <button class='bot_modificar'>Modificar</button>
-                      <button class='bot_eliminar_bahia'>Eliminar</button>
+                      <button class='bot_modificar' ng-controller='panelAdmin' ng-click='modificarBahia(\"" . $bahias[$i]->getIdBahia() . "\")'>Modificar</button>
+                      <button class='bot_eliminar_bahia' ng-controller='panelAdmin' ng-click='eliminarBahia(\"" . $bahias[$i]->getIdBahia() . "\")'>Eliminar</button>
                   </div>";
           }
           //Fin div bahias
@@ -191,9 +205,9 @@
                 </div>
                 <div class='div_datos_2' class='datos' style='width: 40%; left: 35%'>
                     <h3>Costo €</h3>
-                    <input type='text' class='inputs' value='" . $tarifas[$i]->getCosto() . "' id='tarifa" . $tarifas[$i]->getTipo() ."'><br>
+                    <input id='costo" . $tarifas[$i]->getTipo() . "'type='text' class='inputs' value='" . $tarifas[$i]->getCosto() . "' id='tarifa" . $tarifas[$i]->getTipo() ."'><br>
                 </div>
-                <button class='bot_insertar' ng-controller='panelAdmin' ng-click='modificar(\"" . $tarifas[$i]->getTipo() . "\")'>Modificar</button>
+                <button class='bot_insertar' ng-controller='panelAdmin' ng-click='modificarTarifa(\"" . $tarifas[$i]->getTipo() . "\")'>Modificar</button>
             </div>
           ";
         }

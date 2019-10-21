@@ -15,7 +15,10 @@ var menu_on = false;
                 document.getElementById('menu').classList.remove("mov_out");
             };
         });
-        app.controller("go_to", function($scope) {
+        app.controller("go_to", function($scope, $http) {
+            $scope.open_home = function () {
+                document.location.href = "entrar.php";
+            }
            $scope.open_login = function() {
                document.location.href = "entrar.html";
            }; 
@@ -23,18 +26,37 @@ var menu_on = false;
                document.location.href = "registro.html";
            };
             $scope.open_registrar_vehiculo = function() {
-                document.location.href = "registrar_vehiculo.html";
+                document.location.href = "registrar_vehiculo.php";
             };
             $scope.open_clientes = function() {
-                document.location.href = "clientes.html";
+                document.location.href = "clientes.php";
             }
             $scope.open_validar_cliente = function() {
-                document.location.href = "validar_usuario.html";
+                document.location.href = "validar_usuario.php";
             }
             $scope.open_validar_coches = function() {
-                document.location.href = "validar_coches.html";
+                document.location.href = "validar_coches.php";
             }
             $scope.open_config = function() {
-                document.location.href = "panel_admin.html";
+                document.location.href = "panel_admin.php";
+            }
+            $scope.salir = function () {
+                $http.post("ScriptsPHP/controlador.php", {data:{
+                    function: "salir"
+                }}).then(function mySuccess(response) {
+                     var resp = response.data;
+                     if(!angular.equals("-1", resp.error)) {
+                       alert(resp.error);
+                     }
+                     else {              
+                            if(resp.codigo == 0) {
+                                document.location.href = "entrar.html";
+                            }
+                            else {
+                                alert("No se pudo salir");
+                            }
+                         
+                     }
+                  });
             }
         });

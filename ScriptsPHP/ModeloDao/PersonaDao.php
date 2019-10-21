@@ -74,7 +74,7 @@
             }
         }
         public function buscarClientes($dni, $nombre, $apellidos, $email, $telefono) {
-            $consulta = "SELECT * FROM personas WHERE aceptado = 'true' ";
+            $consulta = "SELECT * FROM personas WHERE aceptado = 'true'";
             $cont = 0;
             if(strcmp($dni, "") != 0) {
               $consulta .= "AND dni = '" . $dni . "' ";

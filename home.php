@@ -3,7 +3,7 @@
     include "ScriptsPHP/ModeloVo/PersonaVo.php";
 
     if(is_null($_SESSION["user"])) {
-        //header("Location: entrar.html");
+       // header("Location: entrar.html");
     }
 ?>
 <html>
@@ -21,9 +21,9 @@
     <div id="bloquear" ng-controller="myCTRL" ng-click="cerrar_menu()"></div>
     <div id="menu">
         <div id="menu_items">
-        <div class="menu_item" ng-controller="go_to" ng-click="open_registr()"><a href="registro.html">Registrar vehiculo</a><img src="Images/add-user-button.png" class="img_item_menu"></div>
-        <br>
-        <div class="menu_item" ng-controller="go_to" ng-click="open_login()"><a href="entrar.html">Entrar</a><img src="Images/play-button-inside-a-circle.png" class="img_item_menu"></div>
+        <div class='menu_item' ng-controller='go_to' ng-click='open_home()'><a href='#'>Home</a><img src='Images/add-user-button.png' class='img_item_menu'></div>
+        <div class='menu_item' ng-controller='go_to' ng-click='open_registrar_vehiculo()'><a href='#'>Registrar vehiculo</a><img src='Images/add-user-button.png' class='img_item_menu'></div>
+        <div class='menu_item' ng-controller='go_to' ng-click='salir()'><a href='#'>Salir</a><img src='Images/cancel-button.png' class='img_item_menu'></div>
 
         </div>
     </div>

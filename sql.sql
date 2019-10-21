@@ -65,6 +65,7 @@ insert into personas values ("123456789", "123456789", "123456789","123456789","
 insert into personas values ("111111111", "111111111", "111111111", "111111111", "111111111", "111111111", "true", "111111111");
 insert into personas values ("222222222", "222222222", "222222222", "222222222", "222222222", "222222222", "true", "222222222");
 insert into personas values ("333333333", "333333333", "333333333", "333333333", "333333333", "333333333", "false", "333333333");
+insert into personas values ("987654321", "Admin", "Apellido", "isavchyn@mail.ua", "123456789", "getafe", "admin", "123456");
 insert into vehiculos values ("1234QQQ", "Volvo", "true", "111111111", "publico");
 insert into vehiculos values("1872HWN", "SEAT", "false", "123456789", "privado");
 insert into vehiculos values("1111QQE", "Mercedes", "true", "123456789","publico");
