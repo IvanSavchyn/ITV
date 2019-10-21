@@ -12,6 +12,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js">
         </script>
         <script src="Scripts/index.js"></script>
+        <script src="Scripts/script-cliente-seleccionado.js"></script>
         <link href='https://fonts.googleapis.com/css?family=Playfair Display SC' rel='stylesheet'>
         <link href="Style/style-cliente-seleccionado.css" rel="stylesheet">
         <meta charset="UTF-8">
@@ -48,28 +49,29 @@
             include "ScriptsPHP/controlador2.php";
             $controlador = new Controlador2();
             if($controlador->ComprobarConexion()) {
-                $cliente = $controlador->getClientePorDni($_SESSION["cliente_seleccionado"]);
+                $pers = unserialize($_SESSION["cliente_seleccionado"]);
+                $cliente = $controlador->getClientePorDni($pers->getDni());
                 if(!is_null($cliente)) {
                     echo "
                         <div id='div_datos'>
                             <div id='div_datos_1' class='datos'>
                                 <h3>DNI</h3>
-                                <input disabled type='text' class='inputs' value='" . $cliente->getDni() . "'<br>
+                                <input disabled type='text' id='dni' class='inputs' value='" . $cliente->getDni() . "'<br>
                                 <h3>Email</h3>
-                                <input type='text' class='inputs' value='" . $cliente->getEmail() . "'><br>
+                                <input type='text' class='inputs' id='email' value='" . $cliente->getEmail() . "'><br>
                             </div>
                             <div id='div_datos_2' class='datos'>
                                 <h3>Nombre</h3>
-                                <input type='text' class='inputs' value='" . $cliente->getNombre() . "'><br>
+                                <input type='text' class='inputs' id='nombre' value='" . $cliente->getNombre() . "'><br>
                                 <h3>Telefono</h3>
-                                <input type='text' class='inputs' value='" . $cliente->getTelefono() . "'><br>
+                                <input type='text' class='inputs' id='telefono' value='" . $cliente->getTelefono() . "'><br>
                             </div>
                             <div id='div_datos_3' class='datos'>
                                 <h3>Apellidos</h3>
-                                <input type='text' class='inputs' value='" . $cliente->getApellidos() . "'><br>
+                                <input type='text' class='inputs' id='apellidos' value='" . $cliente->getApellidos() . "'><br>
                             </div>
-                            <button id='bot_modificar'>Modificar</button>
-                            <button id='bot_eliminar_cliente'>Eliminar</button>
+                            <button id='bot_modificar' ng-controller='modificar' ng-click='modificarDatos()'>Modificar</button>
+                            <button id='bot_eliminar_cliente' ng-controller='modificar' ng-click='eliminarCliente()'>Eliminar</button>
                         </div>
                         <h2>Coches</h2>
                     ";
@@ -91,12 +93,12 @@
                                             <div class='coche_3'>
                                                 <h3 class='text_coche'>Tipo</h3>";
                                                 if(strcmp($coches[$i]->getTipo(), "privado") == 0) {
-                                                    echo "<select class='select_tipo_coche'>
+                                                    echo "<select class='select_tipo_coche' id='tipo" . $i ."'>
                                                                 <option value='privado' selected='true'>Privado</option>
                                                                 <option value='publico'>Publico</option>
                                                         </select>";
                                                 }else {
-                                                    echo "<select class='select_tipo_coche'>
+                                                    echo "<select class='select_tipo_coche' id='tipo" . $i ."'>
                                                                 <option value='privado'>Privado</option>
                                                                 <option value='publico' selected='true'>Publico</option>
                                                         </select>";
@@ -105,12 +107,12 @@
                                             echo "
 
                                             </div>
-                                            <button class='bot_modificar_coche'>Modificar</button>
-                                            <button class='bot_eliminar_coche'>Eliminar coche</button>
+                                            <button class='bot_modificar_coche' onclick='modificarCoche(\"" . $coches[$i]->getId() . "\", \"tipo" . $i ."\")'>Modificar</button>
+                                            <button class='bot_eliminar_coche' ng-controller='modificar' ng-click='eliminarCoche(\"". $coches[$i]->getId() . "\")'>Eliminar coche</button>
 
                                         ";
                                     $pago = $controlador->getPago($coches[$i]->getId());
-                                    
+
                                 if(!is_null($pago)) {
                                     echo "
                                         <p class='pago_inf'>Información del pago</p>
@@ -149,14 +151,14 @@
                                                         </div>
                                                         <div class='bahia'>
                                                             <h3 class='text_coche'>Bahia</h3>
-                                                            <select class='select_bahia'>
+                                                            <select class='select_bahia' id='select" . $pago->getId() . "'>
                                                                 <option value=''></option>";
                                                                 for($j = 0; $j < sizeof($bahias); $j++) {
-                                                                    echo "<option value='" . $bahias[$j]->getIdBahia() . "'>" . $bahias[$j]->getIdBahia() . " :Disponible " . $bahias[$j]->getDisponible() ."</option>";
+                                                                    echo "<option value='" . $bahias[$j]->getIdBahia() . "'>ID:" . $bahias[$j]->getIdBahia() . " Disponible: " . $bahias[$j]->getDisponible() ."</option>";
                                                                 }
                                                         echo "</select>
                                                         </div>
-                                                        <button class='bot_asignar'>Asignar parqueadero</button>
+                                                        <button class='bot_asignar' ng-controller='modificar' ng-click='asignarBahia(\"" . $pago->getId() . "\")'>Asignar parqueadero</button>
 
 
                                                     </div>

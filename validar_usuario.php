@@ -35,16 +35,16 @@
 
     </div>
     <h2>Clientes</h2>
-    <?php 
+    <?php
         include ("ScriptsPHP/controlador2.php");
         $controlador2 = new Controlador2();
         if($controlador2->ComprobarConexion()) {
             $clientes = $controlador2->getClientes("false");
-            
+
             if($clientes != null) {
                 for($i = 0; $i < sizeof($clientes); $i++) {
                     echo "
-                        <div id='div_datos'>
+                        <div class='div_datos' id='" . $clientes[$i]->getDni() . "'>
                             <div id='div_datos_1' class='datos'>
                                 <h3>DNI</h3>
                                 <input disabled type='text' class='inputs' value='" . $clientes[$i]->getDni() . "'><br>
@@ -61,24 +61,24 @@
                                 <h3>Apellidos</h3>
                                 <input disabled type='text' class='inputs' value='" . $clientes[$i]->getApellidos() . "'><br>
                             </div>
-                            <button id='bot_eliminar_cliente' onclick='eliminarCliente(\"" . $clientes[$i]->getDni() . "\")'>Eliminar</button>
-                            <button id='bot_aceptar' onclick='aceptarCliente(\"" . $clientes[$i]->getDni() . "\")'>Aceptar</button>
+                            <button id='bot_eliminar_cliente' ng-controller='aceptClientes' ng-click='aceptar(\"" . $clientes[$i]->getDni() . "\", 0)'>Eliminar</button>
+                            <button id='bot_aceptar' ng-controller='aceptClientes' ng-click='aceptar(\"" . $clientes[$i]->getDni() . "\", 1)'>Aceptar</button>
                         </div>
                     ";
                 }
             }
             else {
-                echo "<div id='div_datos' style='text-align: center; height: 20%;'>
+                echo "<div class='div_datos' style='text-align: center; height: 20%;'>
                 <h2 style='margin-left: 35%;'> No hay Clientes!</h2>
                 </div>";
             }
         }
         else {
-            echo "<script>console.log('error en conectar a base de datos');</script>";
+            echo "<h2>Error en conectar a base de datos!</h2>";
         }
         $controlador2->Desconectar();
     ?>
-    
+
 
 </body>
 </html>

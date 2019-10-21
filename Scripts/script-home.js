@@ -6,79 +6,10 @@ function modificarCoche(matricula, id) {
     enviarDatos(enviar);
 
 }
-function eliminarCoche(matricula, id_div) {
-    var enviar = "matricula=" + matricula + "&function=eliminarCoche";
-    enviarDatos(enviar);
-}
 function pagar(matricula) {
     var enviar = "matricula=" + matricula + "&function=pagar";
     enviarDatos(enviar);
 
-}
-function modificarDatos() {
-    var nombres = ["nombre","apellidos","email","telefono","direccion","contr","contr2"];
-            var datos = [];
-            var valido = true;
-            for(var i = 0; i < nombres.length; i++) {
-                datos.push({
-                    nombre: nombres[i],
-                    valor: document.getElementById(nombres[i]).value.toString()
-                });
-            }
-            
-            for(var i = 0; i < nombres.length; i++) {
-                datos[i].valor = datos[i].valor.trim();
-                if(datos[i].valor.length == 0) {
-                    document.getElementById(datos[i].nombre).style.border = "1px solid red";
-                   valido = false;
-                }
-                else {
-                    document.getElementById(datos[i].nombre).style.border = "1px solid #BEBEBE";
-                }
-                
-            }
-            if(!valido) {
-                alert("Rellena todos los campos!");
-            }else {
-                if(datos[0].valor.length != 9) {
-                    valido = false;
-                    document.getElementById(datos[0].nombre).style.border = "1px solid red";
-                }
-                 
-                if(!angular.equals(datos[6].valor, datos[7].valor)) {
-                    valido =  false;
-                    alert("Contraseñas no coinciden!");
-                }
-                else {
-                    if((datos[6].valor.length < 6) || (datos[6].valor.length > 15)) {
-                        valido = false;
-                        alert("Contraseña debe contener entre 6 y 15 caracteres");
-                    }
-                }
-               
-            }
-            
-            if(valido) {
-                
-               
-                 var enviar = "";
-                for(var i = 0; i < datos.length - 1; i++) {
-                    enviar += datos[i].nombre + "=" + datos[i].valor + "&";
-                }
-            } 
-
-}
-function cambiarContrasenia() {
-    var c1 = document.getElementById("contr").value.toString();
-    var c2 = document.getElementById("contr2").value.toString();
-    var enviar = "contr=" + c1 + "&contr2=" + c2 + "&function=cambiarContrasenia";
-    if(!comprobarContr(enviar)) {
-        return "ContraseniaIncorrecta";
-    }
-    else {
-        return "1";
-    }
-    
 }
 function enviarDatos(enviar) {
     if (window.XMLHttpRequest) {
@@ -104,7 +35,7 @@ function comprobarContr(enviar) {
     } else {
         xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
     }
-    
+
     xmlhttp.open("POST","ScriptsPHP/controlador.php",true);
     xmlhttp.setRequestHeader('Content-Type',"application/x-www-form-urlencoded");
     xmlhttp.send(enviar);
@@ -116,13 +47,72 @@ function comprobarContr(enviar) {
     }
 }
 app.controller("modificar", function($scope, $http) {
-    $scope.modificarContrasenia = function(){
-            $http.post("ScriptsPHP/controlador.php", {data:{            
-                function: "cambiarContrasenia",
-                contr: $scope.contr, 
-                contr2: $scope.contr2
+    $scope.modificarDatos = function(){
+            var contr = document.getElementById("contr").value.toString();
+            var contr2 = document.getElementById("contr2").value.toString();
+            var contr3 = document.getElementById("contr3").value.toString();
+
+            if(contr.trim() == '') {
+              contr = '-1';
+              contr2 = '-1';
+            }
+            else {
+              if(angular.equals(contr2, contr3) == false) {
+                document.getElementById("contr2").style.border = "1px solid red";
+                document.getElementById("contr3").style.border = "1px solid red";
+                contr = '-1';
+                contr2 = '-1';
+              }
+              else {
+                document.getElementById("contr2").style.border = "1px solid #BEBEBE";
+                document.getElementById("contr3").style.border = "1px solid #BEBEBE";
+              }
+            }
+
+            $http.post("ScriptsPHP/controlador.php", {data:{
+                function: "modificarDatos",
+                contr: contr,
+                contr2: contr2,
+                es_admin: 0,
+                dni: document.getElementById("dni").value.toString(),
+                nombre: document.getElementById("nombre").value.toString(),
+                apellidos: document.getElementById("apellidos").value.toString(),
+                email: document.getElementById("email").value.toString(),
+                telefono: document.getElementById("telefono").value.toString(),
+                direccion: document.getElementById("direccion").value.toString()
             }}).then(function mySuccess(response) {
-                 alert(response.data);
+                 var resp = response.data;
+                 if(!angular.equals("-1", resp.error)) {
+                   alert(resp.error);
+                 }
+                 else {
+                   if(!angular.equals("-1", resp.info)) {
+                     console.log("3");
+                     alert(resp.info);
+                   }
+                   if(!angular.equals("-1", resp.contr)){
+                     console.log("4");
+                     alert(resp.contr)
+                   }
+                 }
               });
         }
+      $scope.eliminarCoche = function(matricula, idDiv) {
+        $http.post("ScriptsPHP/controlador.php", {data:{
+            function: "eliminarCoche",
+            id: matricula,
+        }}).then(function mySuccess(response) {
+             var resp = response.data;
+             console.log(resp);
+             if(!angular.equals("-1", resp.error)) {
+               alert(resp.error);
+             }
+             else {
+               alert(resp.info);
+               if(resp.codigo == 0) {
+                 document.location.href = 'home.php';
+               }
+             }
+          });
+      }
 });

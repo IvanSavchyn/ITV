@@ -30,7 +30,7 @@
             }
         }
         public function getClientes($aceptado) {
-            
+
             $consulta = "SELECT * FROM personas WHERE aceptado = '" . $aceptado ."';";
             $result = mysqli_query($this->bd, $consulta);
             if(mysqli_num_rows($result) == 0) {
@@ -47,7 +47,7 @@
             }
         }
         public function getClientePorDni($dni) {
-            
+
             $consulta = "SELECT * FROM personas WHERE dni = '" . $dni ."';";
             $result = mysqli_query($this->bd, $consulta);
             if(mysqli_num_rows($result) == 0) {
@@ -110,19 +110,19 @@
         public function eliminarCliente($dni) {
             $consulta = "DELETE FROM personas WHERE dni = '" . $dni . "';";
             if(mysqli_query($this->bd, $consulta)) {
-                return "Cliente Eliminado!";
+                return true;
             }
             else {
-                return "No se puede eliminar cliente!";
+                return false;
             }
         }
         public function aceptarCliente($dni){
             $consulta = "UPDATE personas SET aceptado='true' WHERE dni = '" . $dni . "';";
             if(mysqli_query($this->bd, $consulta)) {
-                return "Cliente aceptado!";
+                return true;
             }
             else {
-                return "No se puede aceptar cliente!";
+                return false;
             }
         }
         public function modificarContrasenia($persona) {
@@ -133,6 +133,15 @@
             else {
                 return false;
             }
+        }
+        public function modificarDatos($persona) {
+          $consulta = "UPDATE personas SET nombre='" . $persona->getNombre() . "', apellidos='" . $persona->getApellidos() . "', email='" . $persona->getEmail() . "', telefono='" . $persona->getTelefono() . "', direccion='" . $persona->getDireccion() . "' WHERE dni = '" . $persona->getDni() . "';";
+          if(mysqli_query($this->bd, $consulta)) {
+            return true;
+          }
+          else {
+            return false;
+          }
         }
     }
 ?>

@@ -30,5 +30,14 @@
             return mysqli_error($this->bd);
           }
         }
+        public function asignarBahia($pago) {
+          $consulta = "UPDATE pagos SET idBahia='" . $pago->getIdBahia() . "' WHERE idPago='" . $pago->getId() ."';";
+          if(mysqli_query($this->bd, $consulta)) {
+            return true;
+          }
+          else {
+            return false;
+          }
+        }
     }
 ?>

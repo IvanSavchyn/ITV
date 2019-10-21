@@ -3,13 +3,13 @@
         private $idBahia;
         private $idParqueadero;
         private $disponible;
-        
+
         public function __construct($idBahia, $idParqueadero, $disponible) {
             $this->idBahia = $idBahia;
             $this->idParqueadero = $idParqueadero;
             $this->disponible = $disponible;
         }
-        
+
         public function setIdBahia($id) {
             $this->idBahia = $id;
         }

@@ -67,6 +67,18 @@
               return null;
           }
         }
+        public function selectParqueaderos() {
+          $parqDao = new ParqueaderoDao($this->bd->getBD());
+          return $parqDao->selectParqueaderos();
+        }
+        public function selectBahias() {
+          $bahiaDao = new BahiaDao($this->bd->getBD());
+          return $bahiaDao->getBahias();
+        }
+        public function selectTarifas() {
+          $tarifas = new TarifaDao($this->bd->getBD());
+          return $tarifas->selectTarifas();
+        }
     }
 
 ?>

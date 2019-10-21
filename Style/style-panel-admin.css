@@ -10,7 +10,7 @@ body {
     border: 1px solid #BEBEBE;
     border-radius: 3px;
     outline: none;
-    
+
 }
 h2 {
     position: relative;
@@ -24,7 +24,7 @@ h3 {
     width: 50%;
     left: 25%;
     text-align: left;
-    
+
 }
 .bot_insertar {
     position: absolute;
@@ -141,7 +141,7 @@ h3 {
     border: 1px solid #BEBEBE;
     border-radius: 5px;
     background-color: #FAFAFA;
-    
+
 }
 
 .bahias {
@@ -225,7 +225,7 @@ h3 {
     border: 1px solid #BEBEBE;
     border-radius: 5px;
     background-color: #FAFAFA;
-    
+
 }
 .tarifa {
     position: relative;
@@ -233,7 +233,7 @@ h3 {
     height: 20%;
     background-color: #FAFAFA;
     border-top: 1px solid #BEBEBE;
-    
+
 }
 .selecT {
     position: absolute;

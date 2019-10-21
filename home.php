@@ -47,7 +47,7 @@
              <div id='div_datos'>
                 <div id='div_datos_1' class='datos'>
                     <h3>DNI</h3>
-                    <input type='text' class='inputs' disabled value='" . $user->getDni() . "'><br>
+                    <input type='text' id='dni' class='inputs' disabled value='" . $user->getDni() . "'><br>
                     <h3>Nombre</h3>
                     <input type='text' id='nombre' class='inputs' value='" . $user->getNombre() . "'><br>
                     <h3>Apellidos</h3>
@@ -63,26 +63,23 @@
                 </div>
                 <div id='div_datos_3' class='datos'>
                     <h3>Contraseña</h3>
-                    <input ng-model='contr' type='password' class='inputs'><br>
+                    <input id='contr' type='password' class='inputs'><br>
                     <h3>Nueva contraseña</h3>
-                    <input ng-model='contr2' type='text' class='inputs'><br>
+                    <input id='contr2' type='text' class='inputs'><br>
                     <h3>Repetir Contraseña</h3>
                     <input id='contr3' type='text' class='inputs'><br>
                 </div>
-                <button id='bot_modificar' ng-controller='modificar' ng-click='modificarContrasenia()'>Modificar</button>
+                <button id='bot_modificar' ng-controller='modificar' ng-click='modificarDatos()'>Modificar</button>
             </div>
         ";
-    ?>
+        echo "<h2>Mis coches</h2>";
 
-    <h2>Mis coches</h2>
-
-     <?php
         include ("ScriptsPHP/controlador2.php");
         $controlador = new Controlador2();
         if($controlador->ComprobarConexion()) {
 
 
-            $coches = $controlador->getCochesCliente("123456789");
+            $coches = $controlador->getCochesCliente($user->getDni());
 
 
 
@@ -118,7 +115,7 @@
 
                                 </div>
                                 <button class='bot_modificar_coche' onclick='modificarCoche(\"" . $coches[$i]->getId() . "\", \"tipo" . $i ."\")'>Modificar</button>
-                                <button class='bot_eliminar_coche' onclick='eliminarCoche(\"" . $coches[$i]->getId() . "\", \"" . $i . "\")'>Eliminar coche</button>
+                                <button class='bot_eliminar_coche' ng-controller='modificar' ng-click='eliminarCoche(\"" . $coches[$i]->getId() . "\", \"" . $i . "\")'>Eliminar coche</button>
 
                             ";
                         $pago = $controlador->getPago($coches[$i]->getId());

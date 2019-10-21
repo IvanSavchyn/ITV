@@ -53,7 +53,7 @@
             }
         }
         public function getCochesCliente($dni) {
-          
+
             $consulta = "SELECT * FROM vehiculos WHERE idPersona = '" . $dni . "'";
             $result = mysqli_query($this->bd, $consulta);
             if(mysqli_num_rows($result) == 0) {
@@ -72,19 +72,19 @@
         public function eliminarCoche($matricula) {
             $consulta = "DELETE FROM vehiculos WHERE matricula='" . $matricula . "';";
             if(mysqli_query($this->bd, $consulta)) {
-                return "Coche Eliminado!";
+                return true;
             }
             else {
-                return "No se puede eliminar el coche!";
+                return false;
             }
         }
         public function aceptarCoche($matricula) {
             $consulta = "UPDATE vehiculos SET aceptado='true' WHERE matricula='" . $matricula . "';";
             if(mysqli_query($this->bd, $consulta)) {
-                return "Coche Aceptado!";
+                return true;
             }
             else {
-                return "No se puede aceptar el coche!";
+                return false;
             }
         }
         public function modificarCoche($matricula, $tipo) {

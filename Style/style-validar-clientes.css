@@ -1,7 +1,7 @@
 body {
     padding-bottom: 2%;
 }
-#div_datos {
+.div_datos {
     position: relative;
     width: 90%;
     height: 35%;
@@ -20,7 +20,7 @@ body {
     border: 1px solid #BEBEBE;
     border-radius: 3px;
     outline: none;
-    
+
 }
 h2 {
     position: relative;
@@ -34,7 +34,7 @@ h3 {
     width: 50%;
     left: 25%;
     text-align: left;
-    
+
 }
 #bot_aceptar {
     position: absolute;

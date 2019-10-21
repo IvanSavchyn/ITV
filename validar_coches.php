@@ -35,10 +35,10 @@
 
     </div>
 
-    
+
     <h2>Coches</h2>
-    
-    <?php 
+
+    <?php
         include ("ScriptsPHP/controlador2.php");
         $controlador2 = new Controlador2();
         if($controlador2->ComprobarConexion()) {
@@ -46,7 +46,7 @@
             if($coches != null) {
                 for($i = 0; $i < sizeof($coches) ; $i = $i + 2) {
                     echo "
-                                <div id='div_datos'>
+                                <div class='div_datos' id='" . $coches[$i+1]->getId() . "'>
                                     <div id='div_datos_1' class='datos'>
                                         <h3>Matricula</h3>
                                         <input disabled type='text' class='inputs' value='" . $coches[$i+1]->getId() . "'><br>
@@ -63,20 +63,23 @@
                                         <h3>Apellidos</h3>
                                         <input disabled type='text' class='inputs' value='" . $coches[$i]->getApellidos() . "'><br>
                                     </div>
-                                    <button id='bot_eliminar_coche' onclick='eliminarCoche(\"" . $coches[$i+1]->getId() . "\")'>Eliminar</button>
-                                    <button id='bot_aceptar' onclick='aceptarCoche(\"" . $coches[$i+1]->getId() . "\")'>Aceptar</button>
+                                    <button id='bot_eliminar_coche' ng-controller='aceptCoches' ng-click='aceptar(\"" . $coches[$i+1]->getId() . "\", 0)'>Eliminar</button>
+                                    <button id='bot_aceptar' ng-controller='aceptCoches' ng-click='aceptar(\"" . $coches[$i+1]->getId() . "\", 1)'>Aceptar</button>
                                 </div>
                         ";
                 }
             }
             else {
-                echo "<div id='div_datos' style='text-align: center; height: 20%;'>
+                echo "<div class='div_datos' style='text-align: center; height: 20%;'>
                 <h2 style='margin-left: 35%;'> No hay coches!</h2>
                 </div>";
             }
         }
         else {
-            echo "error en conectar a base de datos";
+          echo "<div class='div_datos' style='text-align: center; height: 20%;'>
+            <h2 style='margin-left: 35%;'> Error en conectar a base de datos!</h2>
+            </div>";
+
         }
         $controlador2->Desconectar();
     ?>
