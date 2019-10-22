@@ -55,6 +55,7 @@ CREATE TABLE pagos(
     hora TIME NOT NULL,
     fecha DATE NOT NULL,
     costo NUMERIC(6,2) NOT NULL,
+    archivo VARCHAR(15),
     PRIMARY KEY(idPago),
     FOREIGN KEY (idBahia) REFERENCES bahias(idBahia) ON UPDATE CASCADE ON DELETE SET NULL,
     FOREIGN KEY (idVehiculo) REFERENCES vehiculos(matricula) ON UPDATE CASCADE ON DELETE SET NULL
@@ -71,5 +72,5 @@ insert into vehiculos values("1872HWN", "SEAT", "false", "123456789", "privado")
 insert into vehiculos values("1111QQE", "Mercedes", "true", "123456789","publico");
 insert into parqueaderos values ("1", "nomb1", "Getafe");
 insert into bahias values ("1", "1", "true");
-insert into pagos values ("","1", "1872HWN", "22:10", "2019-10-11", "25.03");
-insert into pagos values ("",NULL, "1234QQQ", "15:00", "2019-10-15", "26.00");
+insert into pagos values ("",NULL, "1872HWN", "22:10", "2019-10-11", "25.03", NULL);
+insert into pagos values ("",NULL, "1234QQQ", "15:00", "2019-10-15", "26.00", NULL);

@@ -3,8 +3,14 @@
   class PDF {
 
     private $pdf;
+    private $nomb_archivo;
     public function __construct() {
       $this->pdf = new FPDF('P','mm','A4');
+      $this->nomb_archivo =  "";
+    }
+
+    public function getNombreArchivo() {
+      return $this->nomb_archivo;
     }
 
     public function construirPDF($cliente, $vehiculo, $pago) {
@@ -75,8 +81,11 @@
 
 
 
-
-      $this->pdf->Output("F","ITV" . $vehiculo->getId() . ".pdf");
+      $nomb = "ITV" . $vehiculo->getId() . ".pdf";
+      $this->nomb_archivo = $nomb;
+      $this->pdf->Output("F",$nomb);
+      rename($nomb, "../ArchivosPDF/".$nomb);
     }
+
   }
 ?>

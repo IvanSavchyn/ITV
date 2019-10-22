@@ -18,6 +18,11 @@
     outline: none;
     
 }
+.descargar {
+    position: absolute;
+    left: 77%;
+    top: 95%;
+}
 h2 {
     position: relative;
     width: 30%;

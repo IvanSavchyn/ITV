@@ -164,22 +164,26 @@
 
     function registrarCoche($bd) {
         $resultado = "";
+        if($archivo = simplexml_load_file($_FILES["file"])) {
+          $vehiculoVo = new VehiculoVo($_POST["matricula"],$_POST["marca"], "false", $_POST["dni_cliente"], $_POST["tipo"]);
 
-        $vehiculoVo = new VehiculoVo($_POST["matricula"],$_POST["marca"], "false", $_POST["dni_cliente"], $_POST["tipo"]);
-
-        $vehiculoDao = new VehiculoDao($bd);
-
-        if(!$vehiculoDao->cocheExiste($vehiculoVo)) {
-            $result = $vehiculoDao->registrarVehiculo($vehiculoVo);
-            if(strcmp("insertado", $result) == 0) {
-                $resultado = "Coche registrado!";
-            }
-            else {
-                $resultado = $result;
-            }
+          $vehiculoDao = new VehiculoDao($bd);
+  
+          if(!$vehiculoDao->cocheExiste($vehiculoVo)) {
+              $result = $vehiculoDao->registrarVehiculo($vehiculoVo);
+              if(strcmp("insertado", $result) == 0) {
+                  $resultado = "Coche registrado!";
+              }
+              else {
+                  $resultado = $result;
+              }
+          }
+          else {
+              $resultado = "Coche ya esta registrado!";
+          }
         }
         else {
-            $resultado = "Coche ya esta registrado!";
+          $resultado = "El archivo no esta en fomato xml o esta mal formado!";
         }
         return $resultado;
     }
@@ -205,11 +209,6 @@
             }
 
         }
-        $vehDao = new VehiculoDao($bd);
-        $pagoDao = new PagoDao($bd);
-        $veh = $vehDao->getCoche("1111QQE");
-        $pdf = new PDF();
-        $pdf->construirPDF($persona,$veh,  $pagoDao->getPago($veh->getId()));
         return $result;
     }
     function iniciarSession($persona) {
@@ -418,6 +417,20 @@
       if($pagoDao->asignarBahia($pago)) {
         $result["info"] = "Bahia asignada correctamente!";
         $result["codigo"] = 0;
+
+        
+        $vehDao = new VehiculoDao($bd);
+        $personaDao = new PersonaDao($bd);
+
+        $pago = $pagoDao->getPagoPorId($obj->data->pago);
+        $veh = $vehDao->getCoche($pago->getIdVehiculo());
+        $pers = $personaDao->getClientePorDni($veh->getIdPersona());
+        
+        $pdf = new PDF();
+        $pdf->construirPDF($pers, $veh, $pago);
+        $pago->setArchivo($pdf->getNombreArchivo());
+        $pagoDao->asignarArchivo($pago);
+        
       }
       else {
         $result["info"] = "No se puede asignar bahia!";
@@ -432,6 +445,7 @@
       if($parckDao->insertParqueadero($parck)) {
         $result["info"] = "Parqueadero insertado!";
         $result["codigo"] = 0;
+
       }
       else {
         $result["info"] = "No se pudo insertar parqueadero!";

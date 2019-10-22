@@ -6,6 +6,7 @@
         private $hora;
         private $fecha;
         private $costo;
+        private $archivo;
         
         public function __construct($id, $idBahia, $idVehiculo, $hora, $fecha, $costo) {
             $this->id = $id;
@@ -14,6 +15,7 @@
             $this->hora = $hora;
             $this->fecha = $fecha;
             $this->costo = $costo;
+            $this->archivo = "";
         }
         public function setId($id) {
             $this->id = $id;
@@ -33,6 +35,9 @@
         public function setCosto($Costo) {
             $this->costo = $costo;
         }
+        public function setArchivo($arch) {
+            $this->archivo = $arch;
+        }
         
         public function getId() {
             return $this->id;
@@ -51,6 +56,9 @@
         }
         public function getCosto() {
             return $this->costo;
+        }
+        public function getArchivo() {
+            return $this->archivo;
         }
     }
 ?>

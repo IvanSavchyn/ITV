@@ -6,6 +6,16 @@ app.controller("registrarCoche", function($scope) {
        var dni = document.getElementById("dni_cliente").value;
        var radio = document.getElementsByName("tipo_vehiculo");
        var tipo = "";
+       var doc = document.getElementById("archivo").files[0];
+
+       
+       if(doc === undefined) {
+           valido = false;
+           document.getElementById("archivo").style.border = "1px solid red";
+       }
+       else {
+           document.getElementById("archivo").style.border = "1px solid #177817";
+       }
        if(radio[0].checked) {
            tipo = "privado";
        }else {
@@ -47,28 +57,10 @@ app.controller("registrarCoche", function($scope) {
        
        
        if(valido) {
-           var enviar = "matricula=" + matricula + "$dni_cliente=" + dni +"&marca=" + marca + "&tipo=" + tipo + "&function=registrarCoche";
+           var enviar = "matricula=" + matricula + "$dni_cliente=" + dni +"&marca=" + marca + "&tipo=" + tipo + "&function=registrarCoche" + "&file="+doc;
            enviarDatos(enviar);
        }
-       
-       
+    
    } 
 });
 
-function enviarDatos(enviar) {
-    
-    if (window.XMLHttpRequest) {
-        xmlhttp = new XMLHttpRequest();
-    } else {
-        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-           alert(this.responseText);
-    }
- 
-    }
-    xmlhttp.open("POST","ScriptsPHP/controlador.php",true);
-    xmlhttp.setRequestHeader('Content-Type',"application/x-www-form-urlencoded");
-    xmlhttp.send(enviar);
-}

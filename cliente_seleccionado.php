@@ -145,6 +145,7 @@
                                     //Cerrar div 'pago'
                                     $bahia = $controlador->getBahia($pago->getIdBahia());
                                     $bahias = $controlador->getBahias();
+                                    $hay_archio = false;
                                     if(strcmp($pago->getIdBahia(), "") == 0) {
                                             echo "
                                                 <p class='inf_parqueadero'>Informacion del Bahia</p>
@@ -188,6 +189,7 @@
                                                             <select class='select_bahia'>";
                                                                 for($j = 0; $j < sizeof($bahias); $j++) {
                                                                     if(strcmp($bahia->getIdBahia(), $bahias[$j]->getIdBahia()) == 0) {
+                                                                        $hay_archio = true;
                                                                         echo "<option value='" . $bahias[$j]->getIdBahia() . "' selected='true'>" . $bahias[$j]->getIdBahia() . " :Disponible " . $bahias[$j]->getDisponible() ."</option>";
                                                                     }
                                                                     else {
@@ -196,11 +198,12 @@
                                                                 }
                                                             echo "</select>
                                                         </div>
-                                                        <button class='bot_asignar'>Asignar parqueadero</button>
-
-
-                                                    </div>
-                                            ";
+                                                        <button class='bot_asignar'>Asignar parqueadero</button></div>";
+                                                        if($hay_archio) {
+                                                            $hay_archio = false;
+                                                            echo "<div class='descargar'><a href='ArchivosPDF/" . $pago->getArchivo() . "' target='_blanck' style='color: blue;'>Descargar resultado del ITV</a></div>";
+                                                        }
+                                                    
                                     }
 
 
@@ -214,6 +217,7 @@
                                 }
                                 //Cerrar div 'coche'
                                 echo "</div>";
+                                
                             }
                         //Cerrar div 'div_coches'
                         echo "</div>";

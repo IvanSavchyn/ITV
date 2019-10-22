@@ -1,7 +1,6 @@
 #div_datos {
     position: relative;
     width: 40%;
-    height: 75%;
     left: 30%;
     border: 1px solid #BEBEBE;
     border-radius: 5px;
@@ -52,4 +51,13 @@ h3 {
     position: relative;
     width: 50%;
     left: 25%;
+}
+#archivo {
+    position: relative;
+    width: 50%;
+    left: 25%;;
+    padding: 10px;
+    border: 1px solid #BEBEBE;
+    border-radius: 3px;
+    outline: none;
 }

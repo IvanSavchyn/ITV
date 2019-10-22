@@ -161,6 +161,9 @@
                                     </div>
                                 </div>
                             ";
+                                echo "<div class='descargar'><a href='ArchivosPDF/" . $pago->getArchivo() . "' target='_blanck' style='color: blue;'>Descargar resultado del ITV</a></div>";
+                            
+                        
                         }
                         else {
                             echo "
