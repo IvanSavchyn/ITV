@@ -7,26 +7,27 @@
 ?>
 <html>
     <head>
-        
+
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
         <script src="Scripts/index.js"></script>
         <script src="Scripts/script-registro-vehiculo.js"></script>
-        
+
         <link href='https://fonts.googleapis.com/css?family=Playfair Display SC' rel='stylesheet'>
         <link rel="stylesheet" href="Style/style-index.css">
         <link href="Style/style-registrar-vehiculo.css" rel="stylesheet">
         <meta charset="UTF-8">
+        <link href="http://адрес_сайта/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     </head>
 <body ng-app="myITV">
     <div id="bloquear" ng-controller="myCTRL" ng-click="cerrar_menu()"></div>
     <div id="menu">
         <div id="menu_items">
-        <?php 
+        <?php
         include "ScriptsPHP/ModeloVo/PersonaVo.php";
         $cliente = unserialize($_SESSION["user"]);
         if(strcmp($cliente->getAceptado(), "admin") == 0) {
             echo "
-                
+
                 <div class='menu_item' ng-controller='go_to' ng-click='open_registrar_vehiculo()'><a href='#'>Registrar vehiculo</a><img src='Images/add-plus-button.png' class='img_item_menu'></div>
                 <div class='menu_item' ng-controller='go_to' ng-click='open_clientes()'><a href='#'>Clientes</a><img src='Images/two-men.png' class='img_item_menu'></div>
                 <div class='menu_item' ng-controller='go_to' ng-click='open_validar_cliente()'><a href='#'>Validar cliente</a><img src='Images/verification-mark.png' class='img_item_menu'></div>
@@ -57,12 +58,12 @@
 
     </div>
     <br><br>
-    <?php 
-        
+    <?php
+
         $cliente = unserialize($_SESSION["user"]);
         if(strcmp($cliente->getAceptado(), "admin") == 0) {
             echo "
-                <div id='div_datos' style='height: 88%;'> 
+                <div id='div_datos' style='height: 88%;'>
                 <h2>Registro del vehiculo</h2><br><br>
                 <h3>DNI de cliente: </h3>
                 <input type='text' class='inputs' id='dni_cliente'>
@@ -81,7 +82,7 @@
         }
         else {
             echo "
-            <div id='div_datos' style='height: 75%;'> 
+            <div id='div_datos' style='height: 75%;'>
                 <h2>Registro del vehiculo</h2><br><br>
                 <h3 style='display: none;'>DNI de cliente: </h3>
                 <input type='text' class='inputs' id='dni_cliente' style='display: none;' value='" . $cliente->getDni() . "'>

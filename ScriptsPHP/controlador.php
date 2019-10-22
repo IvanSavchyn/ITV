@@ -1,5 +1,6 @@
 <?php
     include("Logica/Conector.php");
+    include("Logica/PDF.php");
     foreach ( glob(  'C:/xampp/htdocs/ITV/ITV/ScriptsPHP/ModeloVo/*.php') as $filename)
     {
         include_once $filename;
@@ -183,6 +184,7 @@
         return $resultado;
     }
     function entrar($bd) {
+
         $result = "";
         $persona = new PersonaVo($_POST["dni"], "", "", "", "", "","", $_POST["contr"]);
         $personaDao = new PersonaDao($bd);
@@ -203,6 +205,11 @@
             }
 
         }
+        $vehDao = new VehiculoDao($bd);
+        $pagoDao = new PagoDao($bd);
+        $veh = $vehDao->getCoche("1111QQE");
+        $pdf = new PDF();
+        $pdf->construirPDF($persona,$veh,  $pagoDao->getPago($veh->getId()));
         return $result;
     }
     function iniciarSession($persona) {
@@ -441,7 +448,7 @@
       }
       else {
         $result["info"] = "No se pudo eliminar parqueadero!";
-        $result["codigo"] = -1;      
+        $result["codigo"] = -1;
       }
       return $result;
     }

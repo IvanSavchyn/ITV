@@ -16,6 +16,7 @@
         <link href='https://fonts.googleapis.com/css?family=Playfair Display SC' rel='stylesheet'>
         <link href="Style/style-home.css" rel="stylesheet">
         <meta charset="UTF-8">
+        <link href="http://адрес_сайта/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     </head>
 <body ng-app="myITV">
     <div id="bloquear" ng-controller="myCTRL" ng-click="cerrar_menu()"></div>

@@ -23,6 +23,7 @@
         <link href="Style/style-panel-admin.css" rel="stylesheet">
         <title>Configuracion</title>
         <meta charset="UTF-8">
+        <link href="http://адрес_сайта/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     </head>
 <body ng-app="myITV">
     <div id="bloquear" ng-controller="myCTRL" ng-click="cerrar_menu()"></div>

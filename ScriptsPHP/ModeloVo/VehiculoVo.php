@@ -1,11 +1,11 @@
-<?php 
+<?php
     class VehiculoVo {
         private $id;
         private $marca;
         private $aceptado;
         private $idPersona;
         private $idTipo;
-        
+
         public function __construct($id, $marca, $aceptado, $idPersona, $idTipo) {
             $this->id = $id;
             $this->marca = $marca;
@@ -28,6 +28,8 @@
         public function setTipo($idTipo) {
             $this->idTipo = $idTipo;
         }
+
+        
         public function getId() {
             return $this->id;
         }
