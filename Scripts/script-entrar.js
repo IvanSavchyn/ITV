@@ -1,4 +1,4 @@
-app.controller("entrar", function($scope){
+app.controller("entrar", function($scope, $http){
    $scope.entrar = function() {
        var correcto = true;
        var dni = document.getElementById("dni").value;
@@ -24,28 +24,31 @@ app.controller("entrar", function($scope){
        }
 
        if(correcto) {
-           var enviar = "dni=" + dni + "&contr=" + contr + "&function=entrar";
-           var res = enviarDatos(enviar);
-           if(angular.equals(res, "user")) {
-               document.location.href = "home.php";
-           }
+           $http.post("ScriptsPHP/controlador.php", {data:{
+               function: "entrar",
+               dni: dni,
+               contr: contr
+           }}).then(function mySuccess(response) {
+                var resp = response.data;
+
+                if(!angular.equals("-1", resp.error)) {
+                  alert(resp.error);
+                }
+                else {
+
+                  if(resp.codigo == 0) {
+                      if(angular.equals("admin", resp.info)) {
+                        document.location.href = "panel_admin.php";
+                      }
+                      else {
+                        document.location.href = "home.php";
+                      }
+                  }
+                  else{
+                    alert(resp.info);
+                  }
+                }
+             });
        }
    }
 });
-function enviarDatos(enviar) {
-
-    if (window.XMLHttpRequest) {
-        xmlhttp = new XMLHttpRequest();
-    } else {
-        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-           alert(this.responseText);
-    }
-
-    }
-    xmlhttp.open("POST","ScriptsPHP/controlador.php",true);
-    xmlhttp.setRequestHeader('Content-Type',"application/x-www-form-urlencoded");
-    xmlhttp.send(enviar);
-}

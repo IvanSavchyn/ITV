@@ -78,7 +78,7 @@
                 </div>
                 <h3>Ficha tecnica (.xml)</h3>
                 <input type='file' id='archivo'>
-                
+
 
                 <button id='bot_registrar' ng-controller='registrarCoche' ng-click='registrarCoche()' style='height: 8%;'>Registrar</button>
             </div>
@@ -86,10 +86,10 @@
         }
         else {
             echo "
-            <div id='div_datos' style='height: 75%;'>
+            <div id='div_datos' style='height: 86%;'>
                 <h2>Registro del vehiculo</h2><br><br>
                 <h3 style='display: none;'>DNI de cliente: </h3>
-                <input type='text' class='inputs' id='dni_cliente' style='display: none;' value='" . $cliente->getDni() . "'>
+                <input type='text' class='inputs' id='dni_cliente' style='display: none;' value='" . $cliente->getDni() . "' >
                 <h3>Matricula</h3>
                 <input type='text' class='inputs' id='matricula'><br>
                 <h3>Marca</h3>
@@ -99,8 +99,12 @@
                     <input type='radio' name='tipo_vehiculo' value='privado' checked> Privado
                     <input type='radio' name='tipo_vehiculo' value='publico' style='position: relative; margin-left: 30%;'> Publico<br>
                 </div>
-                <button id='bot_registrar' ng-controller='registrarCoche' ng-click='registrarCoche()'>Registrar</button>
-                
+                <h3>Ficha tecnica (.xml)</h3>
+                <input type='file' id='archivo'>
+
+
+                <button id='bot_registrar' ng-controller='registrarCoche' ng-click='registrarCoche()' style='height: 8%;'>Registrar</button>
+
             </div>
             ";
         }

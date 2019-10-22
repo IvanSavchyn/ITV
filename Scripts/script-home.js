@@ -103,7 +103,7 @@ app.controller("modificar", function($scope, $http) {
             id: matricula,
         }}).then(function mySuccess(response) {
              var resp = response.data;
-             console.log(resp);
+             
              if(!angular.equals("-1", resp.error)) {
                alert(resp.error);
              }

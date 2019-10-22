@@ -62,7 +62,7 @@
         }
         public function entrar($cliente) {
 
-            $consulta = "SELECT * FROM personas WHERE dni = '" . $cliente->getDni() ."';";
+            $consulta = "SELECT * FROM personas WHERE dni = '" . $cliente->getDni() ."' AND contrasenia='" . $cliente->getContrasenia() . "';";
             $result = mysqli_query($this->bd, $consulta);
             if(mysqli_num_rows($result) == 0) {
                 return null;

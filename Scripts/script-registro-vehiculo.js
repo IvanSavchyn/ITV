@@ -1,4 +1,4 @@
-app.controller("registrarCoche", function($scope) {
+app.controller("registrarCoche", function($scope, $http) {
    $scope.registrarCoche = function() {
        var valido = true;
        var matricula = document.getElementById("matricula").value;
@@ -6,10 +6,10 @@ app.controller("registrarCoche", function($scope) {
        var dni = document.getElementById("dni_cliente").value;
        var radio = document.getElementsByName("tipo_vehiculo");
        var tipo = "";
-       var doc = document.getElementById("archivo").files[0];
+       var doc = document.querySelector("#archivo");
 
-       
-       if(doc === undefined) {
+
+       if((doc === undefined)||(doc.files.length == 0)) {
            valido = false;
            document.getElementById("archivo").style.border = "1px solid red";
        }
@@ -21,11 +21,11 @@ app.controller("registrarCoche", function($scope) {
        }else {
            tipo = "publico";
        }
-       
+
        matricula = matricula.trim();
        marca = marca.trim();
        dni = dni.trim();
-       
+
        if(marca.length == 0) {
            document.getElementById("marca").style.border = "1px solid red";
            valido = false;
@@ -54,13 +54,54 @@ app.controller("registrarCoche", function($scope) {
                valido = false;
            }
        }
-       
-       
-       if(valido) {
-           var enviar = "matricula=" + matricula + "$dni_cliente=" + dni +"&marca=" + marca + "&tipo=" + tipo + "&function=registrarCoche" + "&file="+doc;
-           enviarDatos(enviar);
-       }
-    
-   } 
-});
 
+
+       if(valido) {
+         const formData = new FormData();
+    		   formData.append('file', doc.files[0], "file_"+matricula+".xml");
+
+           let configuracion = {
+                headers: {
+                "Content-Type": undefined,
+                },
+                transformRequest: angular.identity,
+          };
+
+          $http
+              .post("ScriptsPHP/comprobarXML.php", formData, configuracion)
+              .then(function (respuesta) {
+                
+                    if(angular.equals("true", respuesta.data)) {
+                      var enviar = "matricula=" + matricula + "&dni_cliente=" + dni +"&marca=" + marca + "&tipo=" + tipo + "&function=registrarCoche";
+                      enviarDatos(enviar);
+                    }
+                    else {
+                      alert("No es documento XML o esta mal formado!");
+                    }
+
+              })
+              .catch(function (detallesDelError) {
+                   console.warn("Error al enviar archivos:", detallesDelError);
+              })
+       }
+
+   }
+});
+function enviarDatos(enviar) {
+    if (window.XMLHttpRequest) {
+        xmlhttp = new XMLHttpRequest();
+    } else {
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var respusta = this.responseText;
+            alert(respusta);
+
+    }
+
+    }
+    xmlhttp.open("POST","ScriptsPHP/controlador.php",true);
+    xmlhttp.setRequestHeader('Content-Type',"application/x-www-form-urlencoded");
+    xmlhttp.send(enviar);
+}

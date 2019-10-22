@@ -33,9 +33,6 @@
             if(strcmp($func, "registrarCoche") == 0) {
                 echo registrarCoche($bd->getBD());
             }
-            if(strcmp($func, "entrar") == 0) {
-                echo entrar($bd->getBD());
-            }
             if(strcmp($func, "buscarCliente") == 0) {
                 buscarClientes();
             }
@@ -122,6 +119,11 @@
               $res["codigo"] = 0;
               echo json_encode($res);
             }
+            if(strcmp($func, "entrar") == 0) {
+                $resp =  entrar($bd->getBD(), $obj->data);
+                $resp["error"]="-1";
+                echo json_encode($resp);
+            }
         }
 
 
@@ -164,11 +166,10 @@
 
     function registrarCoche($bd) {
         $resultado = "";
-        if($archivo = simplexml_load_file($_FILES["file"])) {
           $vehiculoVo = new VehiculoVo($_POST["matricula"],$_POST["marca"], "false", $_POST["dni_cliente"], $_POST["tipo"]);
 
           $vehiculoDao = new VehiculoDao($bd);
-  
+
           if(!$vehiculoDao->cocheExiste($vehiculoVo)) {
               $result = $vehiculoDao->registrarVehiculo($vehiculoVo);
               if(strcmp("insertado", $result) == 0) {
@@ -181,31 +182,28 @@
           else {
               $resultado = "Coche ya esta registrado!";
           }
-        }
-        else {
-          $resultado = "El archivo no esta en fomato xml o esta mal formado!";
-        }
         return $resultado;
     }
-    function entrar($bd) {
+    function entrar($bd, $data) {
 
-        $result = "";
-        $persona = new PersonaVo($_POST["dni"], "", "", "", "", "","", $_POST["contr"]);
+        $result = array();
+        $persona = new PersonaVo($data->dni, "", "", "", "", "","", $data->contr);
         $personaDao = new PersonaDao($bd);
 
         $persona = $personaDao->entrar($persona);
         if(is_null($persona)) {
-            $result = "incorrecto";
+            $result["info"] = "Datos incorrectos!";
+            $result["codigo"] = -1;
         }
         else {
             iniciarSession($persona);
             if(strcmp($persona->getAceptado(), "admin") == 0) {
-                $result = "admin";
-                header("Location: ../clientes.php");
+                $result["info"] = "admin";
+                $result["codigo"] = 0;
             }
             else {
-                $result = "user";
-                header("Location: ../home.php");
+              $result["info"] = "user";
+              $result["codigo"] = 0;
             }
 
         }
@@ -418,19 +416,19 @@
         $result["info"] = "Bahia asignada correctamente!";
         $result["codigo"] = 0;
 
-        
+
         $vehDao = new VehiculoDao($bd);
         $personaDao = new PersonaDao($bd);
 
         $pago = $pagoDao->getPagoPorId($obj->data->pago);
         $veh = $vehDao->getCoche($pago->getIdVehiculo());
         $pers = $personaDao->getClientePorDni($veh->getIdPersona());
-        
+
         $pdf = new PDF();
         $pdf->construirPDF($pers, $veh, $pago);
         $pago->setArchivo($pdf->getNombreArchivo());
         $pagoDao->asignarArchivo($pago);
-        
+
       }
       else {
         $result["info"] = "No se puede asignar bahia!";
