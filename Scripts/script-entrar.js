@@ -43,6 +43,8 @@ app.controller("entrar", function($scope, $http){
                       else {
                         document.location.href = "home.php";
                       }
+                      document.getElementById("dni").value = "";
+                      document.getElementById("contr").value = "";
                   }
                   else{
                     alert(resp.info);

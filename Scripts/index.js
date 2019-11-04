@@ -17,7 +17,7 @@ var menu_on = false;
         });
         app.controller("go_to", function($scope, $http) {
             $scope.open_home = function () {
-                document.location.href = "entrar.php";
+                document.location.href = "home.php";
             }
            $scope.open_login = function() {
                document.location.href = "entrar.html";
